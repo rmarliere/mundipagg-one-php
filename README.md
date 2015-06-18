@@ -12,10 +12,6 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 
 ## Getting Started
 
-### Create transaction
-
-Exemplo do arquivo index.php
-
 ```php
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
@@ -51,7 +47,7 @@ try
     // Faz a chamada para criação
     $createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    // Imprime responsta
+    // Imprime resposta
     print "<pre>";
     print json_encode($createSaleResponse, JSON_PRETTY_PRINT);
     print "</pre>";
