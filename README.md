@@ -72,3 +72,8 @@ catch (Exception $ex)
 ## Documentation
 
   http://docs.mundipagg.com
+  
+## Other examples
+
+* [Capture](https://github.com/mundipagg/mundipagg-one-php/wiki/Capture-method)
+* [Cancel](https://github.com/mundipagg/mundipagg-one-php/wiki/Cancel-method)
