@@ -27,13 +27,6 @@ try
     // Cria objeto requisição
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
 
-    /**
-     * Regras do simulador:
-     * R$ 1.000,00 = Autorizada
-     * R$ 1.050,01 = Timeout
-     * R$ 1.500,00 = Não autorizada
-     */
-
     // Define dados do pedido
     $createSaleRequest->addCreditCardTransaction()
         ->setPaymentMethodCode(\MundiPagg\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
@@ -75,6 +68,30 @@ finally
     print json_encode($response);
 }
 ```
+
+## Simulator Rules by Amount
+
+### Authorization
+
+* <= $ 1.050,00 = Authorized
+* >= $ 1.050,01 && < $ 1.051,71 = Timeout
+* >= $ 1.05172 && < $ 1.262,06 = Partial Authorized
+* > $ 1.500,00 = Not Authorized
+ 
+### Capture
+
+* <= $ 1.050,00 = Captured
+* > $ 1.050,00 = Not Captured
+ 
+### Cancellation
+
+* <= $ 1.050,00 = Cancelled
+* > $ 1.050,00 = Not Cancelled
+ 
+### Refund
+* <= $ 1.050,00 = Refunded
+* > $ 1.050,00 = Not Refunded
+
 
 ## Documentation
 
