@@ -22,10 +22,12 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 try
 {
     // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
+    \MundiPagg\ApiClient::
+        setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("26778804-1fa1-4bc8-9623-0a8dce052c2c");
+    \MundiPagg\ApiClient::
+        setMerchantKey("26778804-1fa1-4bc8-9623-0a8dce052c2c");
 
     // Cria objeto requisição
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
