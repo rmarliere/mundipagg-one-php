@@ -207,6 +207,20 @@ class ApiClient
         return $responseContent;
     }
 
+    public function capture(One\DataContract\Request\CaptureRequest $captureRequest)
+    {
+        $responseContent = $this->sendRequest(ApiResourceEnum::CAPTURE, ApiMethodEnum::POST, $captureRequest->getData());
+
+        return $responseContent;
+    }
+
+    public function cancel(One\DataContract\Request\CancelRequest $cancelRequest)
+    {
+        $responseContent = $this->sendRequest(ApiResourceEnum::CANCEL, ApiMethodEnum::POST, $cancelRequest->getData());
+
+        return $responseContent;
+    }
+
     /**
      * @param $httpStatusCode
      * @param $requestKey

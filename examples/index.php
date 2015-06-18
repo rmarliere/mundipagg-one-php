@@ -1,12 +1,12 @@
 <?php
 
-require_once(dirname(__FILE__) . '/bootstrap.php');
+require_once(dirname(__FILE__) . '/../bootstrap.php');
 
 try
 {
     \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR);
     
-    \MundiPagg\ApiClient::setMerchantKey("26778804-1fa1-4bc8-9623-0a8dce052c2c");
+    \MundiPagg\ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
 
     // Cria objeto de solicitação
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
@@ -29,7 +29,7 @@ try
                 ->setCreditCardNumber("5555444433332222")
                 ->setExpMonth(12)
                 ->setExpYear(2030)
-                ->setHolderName("MUNDIPAGG")
+                ->setHolderName("MUNDIPAGG TESTE")
                 ->setSecurityCode("999")
                 ->getBillingAddress()
                     ->setAddressType(\MundiPagg\One\DataContract\Enum\AddressTypeEnum::BILLING)

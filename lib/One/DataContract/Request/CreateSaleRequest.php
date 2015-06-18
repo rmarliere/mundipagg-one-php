@@ -11,11 +11,6 @@ use MundiPagg\BaseObject;
 class CreateSaleRequest extends BaseObject
 {
     /**
-     * @var string Identificação da requisição na plataforma One
-     */
-    protected $RequestKey;
-
-    /**
      * @var CreateSaleRequestData\CreditCardTransaction[] Coleção de transações de cartão de crédito
      */
     protected $CreditCardTransactionCollection;
@@ -60,7 +55,6 @@ class CreateSaleRequest extends BaseObject
      */
     public function __construct()
     {
-        $this->RequestKey = null;
         $this->CreditCardTransactionCollection = null;
         $this->BoletoTransactionCollection = null;
         $this->Buyer = null;
@@ -69,25 +63,6 @@ class CreateSaleRequest extends BaseObject
         $this->Order = null;
         $this->RequestData = null;
         $this->ShoppingCartCollection = null;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRequestKey()
-    {
-        return $this->RequestKey;
-    }
-
-    /**
-     * @param string $requestKey
-     * @return $this
-     */
-    public function setRequestKey($requestKey)
-    {
-        $this->RequestKey = $requestKey;
-
-        return $this;
     }
 
     /**

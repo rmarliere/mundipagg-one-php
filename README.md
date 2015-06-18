@@ -27,7 +27,7 @@ try
 
     // Define a chave da loja
     \MundiPagg\ApiClient::
-        setMerchantKey("26778804-1fa1-4bc8-9623-0a8dce052c2c");
+        setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
 
     // Cria objeto requisição
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
