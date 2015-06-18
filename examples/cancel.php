@@ -11,7 +11,7 @@ try
     \MundiPagg\ApiClient::setMerchantKey("8a2dd57f-1ed9-4153-b4ce-69683efadad5");
 
     // Cria objeto requisição
-    $request = new \MundiPagg\One\DataContract\Request\CaptureRequest();
+    $request = new \MundiPagg\One\DataContract\Request\CancelRequest();
 
     // Define dados da requisição
     $request->setOrderKey("2d79380f-2256-4854-963d-1174a8615db7");
@@ -20,7 +20,7 @@ try
     $client = new MundiPagg\ApiClient();
 
     // Faz a chamada para criação
-    $response = $client->capture($request);
+    $response = $client->cancel($request);
 
     // Imprime responsta
     print "<pre>";

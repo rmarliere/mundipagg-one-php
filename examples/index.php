@@ -20,7 +20,7 @@ try
     $creditCardTransaction
             ->setAmountInCents(199)
             ->setInstallmentCount(1)
-            ->setCreditCardOperation(\MundiPagg\One\DataContract\Enum\CreditCardOperationEnum::AUTH_AND_CAPTURE)
+            ->setCreditCardOperation(\MundiPagg\One\DataContract\Enum\CreditCardOperationEnum::AUTH_ONLY)
             ->setTransactionDateInMerchant(new DateTime())
             ->setTransactionReference(uniqid())
             ->getCreditCard()
