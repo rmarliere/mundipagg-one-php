@@ -12,10 +12,6 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 
 ## Getting Started
 
-### Create transaction
-
-Exemplo do arquivo index.php
-
 ```php
 require_once(dirname(__FILE__) . '/bootstrap.php');
 
