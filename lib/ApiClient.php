@@ -187,7 +187,7 @@ class ApiClient
         $success = $httpStatusCode >= 200 && $httpStatusCode < 300;
 
         // Trata os erros
-        if ($success == false)
+        if ($success == false || !empty($response->ErrorReport))
         {
             @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $data, $responseBody);
         }
