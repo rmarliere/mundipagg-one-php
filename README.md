@@ -51,7 +51,7 @@ try
     // Faz a chamada para criação
     $createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    // Imprime responsta
+    // Imprime resposta
     print "<pre>";
     print json_encode($createSaleResponse, JSON_PRETTY_PRINT);
     print "</pre>";
