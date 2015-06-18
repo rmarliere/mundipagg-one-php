@@ -8,7 +8,7 @@ try
     \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("8a2dd57f-1ed9-4153-b4ce-69683efadad5");
+    \MundiPagg\ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
 
     // Cria objeto requisição
     $request = new \MundiPagg\One\DataContract\Request\CancelRequest();

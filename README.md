@@ -13,7 +13,7 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 ## Getting Started
 
 ```php
-require_once(dirname(__FILE__) . '/bootstrap.php');
+require_once(dirname(__FILE__) . '/vendor/autoload.php');
 
 try
 {

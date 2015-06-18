@@ -11,9 +11,6 @@ try
     // Cria objeto de solicitação
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
 
-    // Preenche o request
-    //$createSaleRequest->setRequestKey("79725aee-6464-4d36-bc9d-9c9cc1c75981");
-
     // Dados da transação de cartão de crédito
     $creditCardTransaction = new \MundiPagg\One\DataContract\Request\CreateSaleRequestData\CreditCardTransaction();
     $createSaleRequest->addCreditCardTransaction($creditCardTransaction);
