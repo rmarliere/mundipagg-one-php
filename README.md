@@ -13,25 +13,31 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 ## Getting Started
 
 ```php
-require_once(dirname(__FILE__) . '/vendor/autoload.php');
-
 try
 {
+    // Carrega dependências
+    require_once(dirname(__FILE__) . '/vendor/autoload.php');
+
     // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::
-        setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
+    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::
-        setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    \MundiPagg\ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
 
     // Cria objeto requisição
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
 
+    /**
+     * Regras do simulador:
+     * R$ 1.000,00 = Autorizada
+     * R$ 1.050,01 = Timeout
+     * R$ 1.500,00 = Não autorizada
+     */
+
     // Define dados do pedido
     $createSaleRequest->addCreditCardTransaction()
         ->setPaymentMethodCode(\MundiPagg\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
-        ->setAmountInCents(199)
+        ->setAmountInCents(150000)
         ->getCreditCard()
             ->setCreditCardBrand(\MundiPagg\One\DataContract\Enum\CreditCardBrandEnum::MASTERCARD)
             ->setCreditCardNumber("5555444433332222")
@@ -47,26 +53,27 @@ try
     // Faz a chamada para criação
     $createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    // Imprime resposta
-    print "<pre>";
-    print json_encode($createSaleResponse, JSON_PRETTY_PRINT);
-    print "</pre>";
+    // Mapeia resposta
+    $httpStatusCode = $createSaleResponse->CreditCardTransactionResultCollection[0]->Success ? 201 : 401;
+    $response = array("message" => $createSaleResponse->CreditCardTransactionResultCollection[0]->AcquirerMessage);
 }
 catch (\MundiPagg\One\DataContract\Report\ApiError $error)
 {
-    // Imprime json
-    print "<pre>";
-    print json_encode($error, JSON_PRETTY_PRINT);
-    print "</pre>";
+    $httpStatusCode = $error->errorCollection->ErrorItemCollection[0]->ErrorCode;
+    $response = array("message" => $error->errorCollection->ErrorItemCollection[0]->Description);
 }
-catch (Exception $ex)
+catch (\Exception $ex)
 {
-    // Imprime json
-    print "<pre>";
-    print json_encode($ex, JSON_PRETTY_PRINT);
-    print "</pre>";
+    $httpStatusCode = 500;
+    $response = array("message" => "Ocorreu um erro inesperado.");
 }
-
+finally
+{
+    // Devolve resposta
+    http_response_code($httpStatusCode);
+    header('Content-Type: application/json');
+    print json_encode($response);
+}
 ```
 
 ## Documentation
