@@ -73,24 +73,24 @@ finally
 
 ### Authorization
 
-* <= $ 1.050,00 = Authorized
-* >= $ 1.050,01 && < $ 1.051,71 = Timeout
-* >= $ 1.05172 && < $ 1.262,06 = Partial Authorized
-* > $ 1.500,00 = Not Authorized
+* <= $ 1.050,00 -> Authorized
+* >= $ 1.050,01 && < $ 1.051,71 ->Timeout
+* >= $ 1.05172 && < $ 1.262,06 -> Partial Authorized
+* >= $ 1.500,00 -> Not Authorized
  
 ### Capture
 
-* <= $ 1.050,00 = Captured
-* > $ 1.050,00 = Not Captured
+* <= $ 1.050,00 -> Captured
+* >= $ 1.050,01 -> Not Captured
  
 ### Cancellation
 
-* <= $ 1.050,00 = Cancelled
-* > $ 1.050,00 = Not Cancelled
+* <= $ 1.050,00 -> Cancelled
+* >= $ 1.050,01 -> Not Cancelled
  
 ### Refund
-* <= $ 1.050,00 = Refunded
-* > $ 1.050,00 = Not Refunded
+* <= $ 1.050,00 -> Refunded
+* >= $ 1.050,01 -> Not Refunded
 
 
 ## Documentation
