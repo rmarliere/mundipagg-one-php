@@ -204,12 +204,7 @@ class ApiClient
     {
         $responseContent = $this->sendRequest(ApiResourceEnum::SALE, ApiMethodEnum::POST, $createSaleRequest->getData());
 
-        // Imprime json
-        print "<pre>";
-        print json_encode($responseContent, JSON_PRETTY_PRINT);
-        print "</pre>";
-
-        return new One\DataContract\Response\CreateSaleResponse();
+        return $responseContent;
     }
 
     /**
