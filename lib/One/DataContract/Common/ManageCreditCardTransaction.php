@@ -2,7 +2,7 @@
 
 namespace MundiPagg\One\DataContract\Common;
 
-use MundiPagg\BaseObject;
+use MundiPagg\One\DataContract\Common\BaseObject;
 
 /**
  * Class ManageCreditCardTransaction

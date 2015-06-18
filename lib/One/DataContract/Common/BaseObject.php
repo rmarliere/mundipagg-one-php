@@ -1,6 +1,6 @@
 <?php
 
-namespace MundiPagg;
+namespace MundiPagg\One\DataContract\Common;
 
 abstract class BaseObject
 {

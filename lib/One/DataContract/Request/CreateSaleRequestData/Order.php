@@ -2,7 +2,7 @@
 
 namespace MundiPagg\One\DataContract\Request\CreateSaleRequestData;
 
-use MundiPagg\BaseObject;
+use MundiPagg\One\DataContract\Common\BaseObject;
 
 /**
  * Class Order
