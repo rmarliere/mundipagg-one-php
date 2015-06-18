@@ -188,4 +188,15 @@ class CreditCardTransaction extends BaseObject
 
         return $this;
     }
+
+    /**
+     * @param int $paymentMethodCode
+     * @return $this
+     */
+    public function setPaymentMethodCode($paymentMethodCode)
+    {
+        $this->getOptions()->setPaymentMethodCode($paymentMethodCode);
+
+        return $this;
+    }
 }

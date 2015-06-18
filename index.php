@@ -176,7 +176,7 @@ try
     $apiClient = new MundiPagg\ApiClient();
 
     // Faz a chamada para criação do token
-    $createSaleResponse = $apiClient->createTransaction($createSaleRequest);
+    $createSaleResponse = $apiClient->createSale($createSaleRequest);
 
     // Imprime json
     //print "<pre>";

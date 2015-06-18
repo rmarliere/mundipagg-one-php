@@ -200,7 +200,7 @@ class ApiClient
      * @param One\DataContract\Request\CreateSaleRequest $createSaleRequest
      * @return One\DataContract\Response\CreateSaleResponse
      */
-    public function createTransaction(One\DataContract\Request\CreateSaleRequest $createSaleRequest)
+    public function createSale(One\DataContract\Request\CreateSaleRequest $createSaleRequest)
     {
         $responseContent = $this->sendRequest(ApiResourceEnum::SALE, ApiMethodEnum::POST, $createSaleRequest->getData());
 
