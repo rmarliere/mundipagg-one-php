@@ -4,13 +4,13 @@
 
     $ composer require mundipagg/mundipagg-one-php dev-master
 
-## Manual Installation
+## Manual installation
 
 ```php
 require __DIR__ . '/mundipagg-one-php/init.php';
 ```
 
-## Getting Started
+## Getting started
 
 ```php
 try
@@ -69,7 +69,7 @@ finally
 }
 ```
 
-## Simulator Rules by Amount
+## Simulator rules by amount
 
 ### Authorization
 
