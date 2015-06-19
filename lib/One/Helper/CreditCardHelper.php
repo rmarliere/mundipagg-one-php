@@ -79,8 +79,8 @@ abstract class CreditCardHelper
 
         // Separa mes e ano da data de validade do cartão
         $expiryParts = explode('/', trim($expiry));
-        $expMonth = @$expiryParts[0];
-        $expYear = @$expiryParts[1];
+        $expMonth = @trim($expiryParts[0]);
+        $expYear = @trim($expiryParts[1]);
 
         // Verifica se o mês é válido
         if ($expMonth < 1 || $expMonth > 12) {
