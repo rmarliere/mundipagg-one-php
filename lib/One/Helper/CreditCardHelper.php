@@ -96,6 +96,11 @@ abstract class CreditCardHelper
         $number = str_replace(array('-', '+'), '', filter_var($number, FILTER_SANITIZE_NUMBER_INT));
         $cvc = str_replace(array('-', '+'), '', filter_var($cvc, FILTER_SANITIZE_NUMBER_INT));
 
+        // Valida número do cartão
+        if (strlen($number) < 10 || strlen($number) > 24){
+            return false;
+        }
+
         // Obtém a bandeira do cartão
         $creditCardBrand = self::getBrandByNumber($number);
 
