@@ -38,8 +38,8 @@ try
         ->setCreditCard($creditCard);
         ;
 
-    //Cria um objeto ApiClient
-    $apiClient = new MundiPagg\ApiClient();
+    // Cria um objeto ApiClient
+    $apiClient = new \MundiPagg\ApiClient();
 
     // Faz a chamada para criação
     $response = $apiClient->createSale($createSaleRequest);
