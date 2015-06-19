@@ -3,7 +3,6 @@
 namespace MundiPagg\One\DataContract\Request\CreateSaleRequestData;
 
 use MundiPagg\One\DataContract\Common\BaseObject;
-use MundiPagg\One\DataContract\Enum\CreditCardOperationEnum;
 
 /**
  * Class CreditCardTransaction
@@ -88,6 +87,14 @@ class CreditCardTransaction extends BaseObject
         }
 
         return $this->CreditCard;
+    }
+
+    /**
+     * @param \MundiPagg\One\DataContract\Request\CreateSaleRequestData\CreditCard $creditCard
+     */
+    public function setCreditCard(CreditCard $creditCard)
+    {
+        $this->CreditCard = $creditCard;
     }
 
     /**
