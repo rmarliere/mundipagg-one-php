@@ -8,6 +8,7 @@ namespace MundiPagg;
  */
 use MundiPagg\One\DataContract\Enum\ApiMethodEnum;
 use MundiPagg\One\DataContract\Enum\ApiResourceEnum;
+use MundiPagg\One\DataContract\Response\BaseResponse;
 
 /**
  * Class ApiClient
@@ -72,7 +73,7 @@ class ApiClient
 
     /**
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     private function getBaseUrl()
     {
@@ -82,7 +83,7 @@ class ApiClient
             case One\DataContract\Enum\ApiEnvironmentEnum::STAGING: return 'https://stagingv2.mundipaggone.com';
             case One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR: return 'https://stagingv2-mundipaggone-com-9blwcrfjp9qk.runscope.net';
 
-            default: throw new Exception("The api environment was not defined.");
+            default: throw new \Exception("The api environment was not defined.");
         }
     }
 
@@ -102,8 +103,8 @@ class ApiClient
      * @param $resource
      * @param $method
      * @param $data
+     * @throws \Exception
      * @return array
-     * @throws Exception
      */
     private function getOptions($resource, $method, $data)
     {
@@ -145,7 +146,7 @@ class ApiClient
                 $options[CURLOPT_URL] = $this->buildUrl($resource).'&'.http_build_query($data);
                 break;
             default:
-                throw new Exception("Invalid http method.");
+                throw new \Exception("Invalid http method.");
         }
 
         return $options;
@@ -155,10 +156,8 @@ class ApiClient
      * @param $resource
      * @param $method
      * @param $data
-     * @return mixed
-     * @throws One\DataContract\Report\ApiError
-     * @throws Exception
      * @throws \Exception
+     * @return mixed
      */
     private function sendRequest($resource, $method, $data)
     {
@@ -183,11 +182,8 @@ class ApiClient
         // Decodifica a resposta json
         $response = json_decode($responseBody);
 
-        // Verifica se obteve sucesso
-        $success = $httpStatusCode >= 200 && $httpStatusCode < 300;
-
-        // Trata os erros
-        if ($success == false || !empty($response->ErrorReport))
+        // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
+        if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
         {
             @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $data, $responseBody);
         }
@@ -196,29 +192,94 @@ class ApiClient
         return $response;
     }
 
-    /**
-     * @param One\DataContract\Request\CreateSaleRequest $createSaleRequest
-     * @return One\DataContract\Response\CreateSaleResponse
-     */
     public function createSale(One\DataContract\Request\CreateSaleRequest $createSaleRequest)
     {
-        $responseContent = $this->sendRequest(ApiResourceEnum::SALE, ApiMethodEnum::POST, $createSaleRequest->getData());
+        // Dispara a requisição
+        $createSaleResponse = $this->sendRequest(ApiResourceEnum::SALE, ApiMethodEnum::POST, $createSaleRequest->getData());
 
-        return $responseContent;
+        // Verifica sucesso
+        if (empty($createSaleResponse->BoletoTransactionResultCollection) && empty($createSaleResponse->CreditCardTransactionResultCollection))
+        {
+            $isSuccess = false;
+        }
+        else
+        {
+            $isSuccess = true;
+
+            if (count($createSaleResponse->BoletoTransactionResultCollection) > 0) foreach ($createSaleResponse->BoletoTransactionResultCollection as $boletoTransaction)
+            {
+                if (!$boletoTransaction->Success) $isSuccess = false;
+            }
+
+            if (count($createSaleResponse->CreditCardTransactionResultCollection) > 0) foreach ($createSaleResponse->CreditCardTransactionResultCollection as $creditCardTransaction)
+            {
+                if (!$creditCardTransaction->Success) $isSuccess = false;
+            }
+        }
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($isSuccess, $createSaleResponse);
+
+        // Retorna reposta
+        return $response;
     }
 
     public function capture(One\DataContract\Request\CaptureRequest $captureRequest)
     {
-        $responseContent = $this->sendRequest(ApiResourceEnum::CAPTURE, ApiMethodEnum::POST, $captureRequest->getData());
+        // Dispara a requisição
+        $captureResponse = $this->sendRequest(ApiResourceEnum::CAPTURE, ApiMethodEnum::POST, $captureRequest->getData());
 
-        return $responseContent;
+        // Verifica sucesso
+        if (count($captureResponse->CreditCardTransactionResultCollection) <= 0)
+        {
+            $isSuccess = false;
+        }
+        else
+        {
+            $isSuccess = true;
+
+            foreach ($captureResponse->CreditCardTransactionResultCollection as $creditCardTransaction)
+            {
+                if (!$creditCardTransaction->Success) {
+                    $isSuccess = false;
+                }
+            }
+        }
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($isSuccess, $captureResponse);
+
+        // Retorna rsposta
+        return $response;
     }
 
     public function cancel(One\DataContract\Request\CancelRequest $cancelRequest)
     {
-        $responseContent = $this->sendRequest(ApiResourceEnum::CANCEL, ApiMethodEnum::POST, $cancelRequest->getData());
+        // Dispara a requisição
+        $cancelResponse = $this->sendRequest(ApiResourceEnum::CANCEL, ApiMethodEnum::POST, $cancelRequest->getData());
 
-        return $responseContent;
+        // Verifica sucesso
+        if (count($cancelResponse->CreditCardTransactionResultCollection) <= 0)
+        {
+            $isSuccess = false;
+        }
+        else
+        {
+            $isSuccess = true;
+
+            foreach ($cancelResponse->CreditCardTransactionResultCollection as $creditCardTransaction)
+            {
+                if (!$creditCardTransaction->Success) {
+                    $isSuccess = false;
+                }
+            }
+        }
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($isSuccess, $cancelResponse);
+
+        // Retorna rsposta
+        return $response;
     }
 
     /**

@@ -14,7 +14,7 @@ try
     $request = new \MundiPagg\One\DataContract\Request\CaptureRequest();
 
     // Define dados da requisição
-    $request->setOrderKey("2d79380f-2256-4854-963d-1174a8615db7");
+    $request->setOrderKey("47e80399-fe75-40cd-8c41-b6457b37e75e");
 
     //Cria um objeto ApiClient
     $client = new MundiPagg\ApiClient();
@@ -24,7 +24,7 @@ try
 
     // Imprime responsta
     print "<pre>";
-    print json_encode($response, JSON_PRETTY_PRINT);
+    print json_encode(array('success' => $response->isSuccess(), 'data' => $response->getData()), JSON_PRETTY_PRINT);
     print "</pre>";
 }
 catch (\MundiPagg\One\DataContract\Report\ApiError $error)
