@@ -15,6 +15,9 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 ```php
 try
 {
+    // Carrega dependências
+    require_once(dirname(__FILE__) . '/vendor/autoload.php');
+
     // Define o ambiente utilizado (produção ou homologação)
     \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
 
