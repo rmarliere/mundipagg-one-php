@@ -3,6 +3,7 @@
 namespace MundiPagg\One\Helper;
 
 use MundiPagg\One\DataContract\Enum\CreditCardBrandEnum;
+use MundiPagg\One\DataContract\Request\CreateSaleRequestData\CreditCard;
 
 /**
  * Class CreditCardHelper
@@ -56,5 +57,66 @@ abstract class CreditCardHelper
         {
             return null;
         }
+    }
+
+    /**
+     * @param $number
+     * @param $name
+     * @param $expiry
+     * @param $cvc
+     * @return bool|CreditCard
+     */
+    public static function createCreditCard($number, $name, $expiry, $cvc)
+    {
+        if (empty($number) || empty($name) || empty($expiry) || empty($cvc)) {
+            return false;
+        }
+
+        // Verifica se foi enviado uma barra
+        if (stristr($expiry, '/') === false) {
+            return false;
+        }
+
+        // Separa mes e ano da data de validade do cartão
+        $expiryParts = explode('/', trim($expiry));
+        $expMonth = @$expiryParts[0];
+        $expYear = @$expiryParts[1];
+
+        // Verifica se o mês é válido
+        if ($expMonth < 1 || $expMonth > 12) {
+            return false;
+        }
+
+        // Verifica se o ano é válido
+        if (!in_array(strlen($expYear), array(2, 4))) {
+            return false;
+        }
+
+        // Extrai somente números
+        $number = str_replace(array('-', '+'), '', filter_var($number, FILTER_SANITIZE_NUMBER_INT));
+        $cvc = str_replace(array('-', '+'), '', filter_var($cvc, FILTER_SANITIZE_NUMBER_INT));
+
+        // Obtém a bandeira do cartão
+        $creditCardBrand = self::getBrandByNumber($number);
+
+        // Valida a bandeira
+        if ($creditCardBrand == null) {
+            return false;
+        }
+
+        // Sanitiza o nome
+        $name = filter_var(trim($name), FILTER_SANITIZE_STRING);
+
+        // Cria um objeto de cartão de crédito
+        $creditCard = new CreditCard();
+        $creditCard->setCreditCardBrand($creditCardBrand);
+        $creditCard->setHolderName($name);
+        $creditCard->setCreditCardNumber($number);
+        $creditCard->setExpMonth($expMonth);
+        $creditCard->setExpYear($expYear);
+        $creditCard->setSecurityCode($cvc);
+
+        // Devolve o cartão
+        return $creditCard;
     }
 }
