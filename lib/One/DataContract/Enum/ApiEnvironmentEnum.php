@@ -14,12 +14,7 @@ abstract class ApiEnvironmentEnum
     const PRODUCTION = 'production';
 
     /**
-     * Ambiente de homologação
+     * Ambiente de testes
      */
     const STAGING = 'staging';
-
-    /**
-     * Ambiente de testes com inspeção
-     */
-    const INSPECTOR = 'inspector';
 }
