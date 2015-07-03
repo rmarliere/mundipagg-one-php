@@ -3,6 +3,7 @@
 namespace MundiPagg\One\Helper;
 
 use MundiPagg\One\DataContract\Enum\CreditCardBrandEnum;
+use MundiPagg\One\DataContract\Report\CreditCardError;
 use MundiPagg\One\DataContract\Request\CreateSaleRequestData\CreditCard;
 
 /**
@@ -64,17 +65,26 @@ abstract class CreditCardHelper
      * @param $name
      * @param $expiry
      * @param $cvc
-     * @return bool|CreditCard
+     * @return CreditCard
+     * @throws CreditCardError
      */
     public static function createCreditCard($number, $name, $expiry, $cvc)
     {
-        if (empty($number) || empty($name) || empty($expiry) || empty($cvc)) {
-            return false;
+        if (empty($number)) {
+            throw new CreditCardError("Invalid credit card number.", "number");
+        }
+
+        if (empty($name)) {
+            throw new CreditCardError("Invalid credit card holder name.", "holderName");
+        }
+
+        if (empty($cvc)) {
+            throw new CreditCardError("Invalid credit card security code.", "securityCode");
         }
 
         // Verifica se foi enviado uma barra
-        if (stristr($expiry, '/') === false) {
-            return false;
+        if (empty($expiry) || stristr($expiry, '/') === false) {
+            throw new CreditCardError("Invalid credit card expiration date.", "expirationDate");
         }
 
         // Separa mes e ano da data de validade do cartão
@@ -84,12 +94,12 @@ abstract class CreditCardHelper
 
         // Verifica se o mês é válido
         if ($expMonth < 1 || $expMonth > 12) {
-            return false;
+            throw new CreditCardError("Invalid credit card expiration month.", "expirationMonth");
         }
 
         // Verifica se o ano é válido
         if (!in_array(strlen($expYear), array(2, 4))) {
-            return false;
+            throw new CreditCardError("Invalid credit card expiration year.", "expirationYear");
         }
 
         // Extrai somente números
@@ -98,7 +108,7 @@ abstract class CreditCardHelper
 
         // Valida número do cartão
         if (strlen($number) < 10 || strlen($number) > 24){
-            return false;
+            throw new CreditCardError("Invalid credit card number.", "number");
         }
 
         // Obtém a bandeira do cartão
@@ -106,7 +116,7 @@ abstract class CreditCardHelper
 
         // Valida a bandeira
         if ($creditCardBrand == null) {
-            return false;
+            throw new CreditCardError("Invalid credit card brand.", "brand");
         }
 
         // Sanitiza o nome

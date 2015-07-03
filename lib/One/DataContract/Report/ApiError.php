@@ -6,10 +6,6 @@ namespace MundiPagg\One\DataContract\Report;
  * Class ApiError
  * @package MundiPagg\One\DataContract\Report
  */
-/**
- * Class ApiError
- * @package MundiPagg\One\DataContract\Report
- */
 class ApiError extends \Exception
 {
     /**
