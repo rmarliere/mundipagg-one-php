@@ -48,6 +48,11 @@ try
     $httpStatusCode = $response->isSuccess() ? 201 : 401;
     $response = array("message" => $response->getData()->CreditCardTransactionResultCollection[0]->AcquirerMessage);
 }
+catch (\MundiPagg\One\DataContract\Report\CreditCardError $error)
+{
+    $httpStatusCode = 400;
+    $response = array("message" => $error->getMessage());
+}
 catch (\MundiPagg\One\DataContract\Report\ApiError $error)
 {
     $httpStatusCode = $error->errorCollection->ErrorItemCollection[0]->ErrorCode;
