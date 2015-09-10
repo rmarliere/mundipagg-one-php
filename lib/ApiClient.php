@@ -131,24 +131,25 @@ class ApiClient
             $options[CURLOPT_CAINFO] = dirname(__FILE__) . '/../data/ca-certificates.crt';
         }
 
+        //echo "<br/> <br/> ".$this->buildUrl($resource).'/'.http_build_query($data)."<br/> <br/>";
+
         switch ($method)
         {
             case One\DataContract\Enum\ApiMethodEnum::POST:
                 $options[CURLOPT_POSTFIELDS] = json_encode($data);
                 break;
             case One\DataContract\Enum\ApiMethodEnum::GET:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'&'.http_build_query($data);
+                $options[CURLOPT_URL] = $this->buildUrl($resource).'/'.http_build_query($data);
                 break;
             case One\DataContract\Enum\ApiMethodEnum::PUT:
                 $options[CURLOPT_POSTFIELDS] = json_encode($data);
                 break;
             case One\DataContract\Enum\ApiMethodEnum::DELETE:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'&'.http_build_query($data);
+                $options[CURLOPT_URL] = $this->buildUrl($resource).'/'.http_build_query($data);
                 break;
             default:
                 throw new \Exception("Invalid http method.");
         }
-
         return $options;
     }
 
@@ -175,12 +176,12 @@ class ApiClient
 
         // Fecha a sessão cURL
         curl_close($curlSession);
-        
+
         // Verifica se não obteve resposta
         if (!$responseBody) throw new \Exception("Error Processing Request", 1);
 
         // Decodifica a resposta json
-        $response = json_decode($responseBody);
+        $response = json_decode($responseBody,true);
 
         // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
         if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
@@ -253,30 +254,6 @@ class ApiClient
         return $response;
     }
 
-	public function querySale(string $orderKey)
-	{
-		//Dispara a requisição
-		$queryResponse = $this->sendRequest(ApiResourceEnum::QUERY, ApiMethodEnum::GET, $orderKey);
-		
-		echo($queryResponse);
-		
-		// Verifica sucesso
-        if (count($queryResponse->SaleDataCollection) <= 0)
-        {
-            $isSuccess = false;
-        }
-        else
-        {
-            $isSuccess = true;
-        }
-
-        // Cria objeto de resposta
-        $response = new BaseResponse($isSuccess, $queryResponse);
-
-        // Retorna rsposta
-        return $response;
-	}
-	
     public function cancel(One\DataContract\Request\CancelRequest $cancelRequest)
     {
         // Dispara a requisição
@@ -317,5 +294,39 @@ class ApiClient
     private function handleApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody)
     {
         throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody);
+    }
+
+
+
+    public function searchSaleByOrderReference($orderReference)
+    {
+        //Monta o parametro
+        $data = array('OrderReference' => $orderReference);
+
+        $returnData = $this->returnQueryObject($data);
+
+        return $returnData;
+    }
+
+    public function searchSaleByOrderKey($orderKey)
+    {
+        //Monta o parametro
+        $data = array('OrderKey' => $orderKey);
+
+        $returnData = $this->returnQueryObject($data);
+
+        return $returnData;
+    }
+
+    private function returnQueryObject($data)
+    {
+        //Dispara a requisição
+        $queryResponse = $this->sendRequest(ApiResourceEnum::QUERY, ApiMethodEnum::GET, $data);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $queryResponse);
+
+        // Retorna rsposta
+        return $response;
     }
 }
