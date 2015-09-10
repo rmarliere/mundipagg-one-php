@@ -1,13 +1,18 @@
 <?php
 
+use MundiPagg\ApiClient;
+
 require_once(dirname(__FILE__) . '/../bootstrap.php');
+
+
 
 try
 {
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR);
-    
-    \MundiPagg\ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
-
+    echo "11";
+    ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
+    echo "22";
+    ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    echo "aa";
     // Cria objeto de solicitação
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
 
@@ -177,20 +182,23 @@ try
 
     // Imprime json
     //print "<pre>";
-    //print json_encode($createSaleRequest->getData(), JSON_PRETTY_PRINT);
+    //echo json_encode($createSaleRequest->getData(), JSON_PRETTY_PRINT);
     //print "</pre>";
 }
 catch (\MundiPagg\One\DataContract\Report\ApiError $error)
 {
+    echo $error;
     // Imprime json
-    print "<pre>";
-    print json_encode($error, JSON_PRETTY_PRINT);
-    print "</pre>";
+    echo "<pre>";
+    echo json_encode($error, JSON_PRETTY_PRINT);
+    echo "</pre>";
 }
 catch (Exception $ex)
 {
+    echo $ex;
     // Imprime json
-    print "<pre>";
-    print json_encode($ex, JSON_PRETTY_PRINT);
-    print "</pre>";
+    echo "<pre>";
+    echo json_encode($ex, JSON_PRETTY_PRINT);
+    echo "</pre>";
 }
+?>

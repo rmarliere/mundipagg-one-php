@@ -80,7 +80,7 @@ class ApiClient
         switch (self::getEnvironment())
         {
             case One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION: return 'https://transactionv2.mundipaggone.com';
-            case One\DataContract\Enum\ApiEnvironmentEnum::STAGING: return 'https://stagingv2.mundipaggone.com';
+            case One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX: return 'https://sandbox.mundipaggone.com';
             case One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR: return 'https://stagingv2-mundipaggone-com-9blwcrfjp9qk.runscope.net';
 
             default: throw new \Exception("The api environment was not defined.");
@@ -253,6 +253,30 @@ class ApiClient
         return $response;
     }
 
+	public function querySale(string $orderKey)
+	{
+		//Dispara a requisição
+		$queryResponse = $this->sendRequest(ApiResourceEnum::QUERY, ApiMethodEnum::GET, $orderKey);
+		
+		echo($queryResponse);
+		
+		// Verifica sucesso
+        if (count($queryResponse->SaleDataCollection) <= 0)
+        {
+            $isSuccess = false;
+        }
+        else
+        {
+            $isSuccess = true;
+        }
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($isSuccess, $queryResponse);
+
+        // Retorna rsposta
+        return $response;
+	}
+	
     public function cancel(One\DataContract\Request\CancelRequest $cancelRequest)
     {
         // Dispara a requisição
