@@ -88,31 +88,31 @@ class ApiClient
     }
 
     /**
-     * @param $resource
+     * @param $uri
      * @return string
      */
-    private function buildUrl($resource)
+    private function buildUrl($uri)
     {
-        $url = sprintf("%s/%s", $this->getBaseUrl(), $resource);
+        $url = sprintf("%s/%s", $this->getBaseUrl(), $uri);
 
         return $url;
     }
 
 
     /**
-     * @param $resource
+     * @param $uri
      * @param $method
-     * @param $data
-     * @throws \Exception
+     * @param null $bodyData
+     * @param null $queryStringData
      * @return array
      */
-    private function getOptions($resource, $method, $data)
+    private function getOptions($uri, $method, $bodyData = null, $queryStringData = null)
     {
         $options = array
         (
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_URL => $this->buildUrl($resource),
+            CURLOPT_URL => $this->buildUrl($uri),
             CURLOPT_HTTPHEADER => array
             (
                 'Content-type: application/json',
@@ -125,35 +125,26 @@ class ApiClient
             CURLOPT_SSL_VERIFYPEER => self::isSslCertsVerificationEnabled()
         );
 
+        // Se for passado parametro na query string, vamos concatenar eles na url
+        if ($queryStringData != null)
+        {
+            $options[CURLOPT_URL] .= '?'.http_build_query($queryStringData);
+        }
+
         // Associa o certificado para a verificação
         if (self::isSslCertsVerificationEnabled())
         {
             $options[CURLOPT_CAINFO] = dirname(__FILE__) . '/../data/ca-certificates.crt';
         }
 
-        //echo $this->buildUrl($resource)."<br/>";
-        //echo "<br/> <br/> ".$this->buildUrl($resource).'/'. str_replace("parametro=","",http_build_query($data))."<br/> <br/>";
-
-        switch ($method)
+        // Se o método http for post ou put e tiver dados para enviar no body
+        if (in_array($method, array(One\DataContract\Enum\ApiMethodEnum::POST, One\DataContract\Enum\ApiMethodEnum::PUT)) && $bodyData != null)
         {
-            case One\DataContract\Enum\ApiMethodEnum::POST:
-                $options[CURLOPT_POSTFIELDS] = json_encode($data);
-                break;
-            case One\DataContract\Enum\ApiMethodEnum::GET:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'/'. str_replace("parametro=","",http_build_query($data));
-                break;
-            case One\DataContract\Enum\ApiMethodEnum::PUT:
-                $options[CURLOPT_POSTFIELDS] = json_encode($data);
-                break;
-            case One\DataContract\Enum\ApiMethodEnum::DELETE:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'/'.http_build_query($data);
-                break;
-            default:
-                throw new \Exception("Invalid http method.");
+            $options[CURLOPT_POSTFIELDS] = json_encode($bodyData);
         }
+
         return $options;
     }
-
 
     /**
      * @param $resource
@@ -162,13 +153,13 @@ class ApiClient
      * @throws \Exception
      * @return mixed
      */
-    private function sendRequest($resource, $method, $data)
+    private function sendRequest($resource, $method, $bodyData = null, $queryString = null)
     {
         // Inicializa sessão cURL
         $curlSession = curl_init();
 
         // Define as opções da sessão
-        curl_setopt_array($curlSession, $this->getOptions($resource, $method, $data));
+        curl_setopt_array($curlSession, $this->getOptions($resource, $method, $bodyData, $queryString));
 
         // Dispara a requisição cURL
         $responseBody = curl_exec($curlSession);
@@ -188,7 +179,8 @@ class ApiClient
         // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
         if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
         {
-            @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $data, $responseBody);
+            if($bodyData != null ){ @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $bodyData, $responseBody);}
+            else { @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $queryString, $responseBody);}
         }
 
         // Retorna a resposta
@@ -298,19 +290,29 @@ class ApiClient
         throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody);
     }
 
-    public function GetInstantBuyData($instantBuyKey)
+    public function GetInstantBuyDataByInstantBuyKey($instantBuyKey)
     {
-        $data = array('parametro' => $instantBuyKey);
+        $resource = sprintf("creditcard/%s", $instantBuyKey);
 
         //Dispara a requisição
-        $instantBuyKeyResponse = $this->sendRequest(ApiResourceEnum::INSTANTBUYKEY, ApiMethodEnum::GET, $data);
-
-        echo "<br/><br/>".$instantBuyKeyResponse->ErrorReport."<br/><br/>";
+        $instantBuyKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
         // Cria objeto de resposta
         $response = new BaseResponse(true, $instantBuyKeyResponse);
 
+        // Retorna rsposta
+        return $response;
+    }
 
+    public function GetInstantBuyDataByBuyerKey($buyerKey)
+    {
+        $resource = sprintf("creditcard/%s/buyerkey", $buyerKey);
+
+        //Dispara a requisição
+        $instantBuyKeyByBuyerKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $instantBuyKeyByBuyerKeyResponse);
 
         // Retorna rsposta
         return $response;

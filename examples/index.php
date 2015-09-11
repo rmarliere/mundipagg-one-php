@@ -6,8 +6,8 @@ require_once(dirname(__FILE__) . '/../bootstrap.php');
 try
 {
     ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
-    ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
-    //ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5");
+    //ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5"); // SANDBOX MERCHANT
 
     // Cria objeto de solicitação
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
@@ -174,12 +174,12 @@ try
     $apiClient = new MundiPagg\ApiClient();
 
     // Faz a chamada para criação do token
-    //$createSaleResponse = $apiClient->createSale($createSaleRequest);
+    $createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    $response = $apiClient->GetInstantBuyData("424388EA-1019-4914-AA12-BEB548C004BD");
+    //$response = $apiClient->GetInstantBuyDataByBuyerKey("424388EA-1019-4914-AA12-BEB548C004BD");
 
     //print "<pre>";
-    //echo var_dump($response, JSON_PRETTY_PRINT);
+    //echo var_dump($createSaleResponse, JSON_PRETTY_PRINT);
     //print "</pre>";
 
     // Imprime json
