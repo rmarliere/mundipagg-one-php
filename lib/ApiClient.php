@@ -80,7 +80,7 @@ class ApiClient
         switch (self::getEnvironment())
         {
             case One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION: return 'https://transactionv2.mundipaggone.com';
-            case One\DataContract\Enum\ApiEnvironmentEnum::STAGING: return 'https://stagingv2.mundipaggone.com';
+            case One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX: return 'https://sandbox.mundipaggone.com';
             case One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR: return 'https://stagingv2-mundipaggone-com-9blwcrfjp9qk.runscope.net';
 
             default: throw new \Exception("The api environment was not defined.");
@@ -88,31 +88,31 @@ class ApiClient
     }
 
     /**
-     * @param $resource
+     * @param $uri
      * @return string
      */
-    private function buildUrl($resource)
+    private function buildUrl($uri)
     {
-        $url = sprintf("%s/%s", $this->getBaseUrl(), $resource);
+        $url = sprintf("%s/%s", $this->getBaseUrl(), $uri);
 
         return $url;
     }
 
 
     /**
-     * @param $resource
+     * @param $uri
      * @param $method
-     * @param $data
-     * @throws \Exception
+     * @param null $bodyData
+     * @param null $queryStringData
      * @return array
      */
-    private function getOptions($resource, $method, $data)
+    private function getOptions($uri, $method, $bodyData = null, $queryStringData = null)
     {
         $options = array
         (
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_URL => $this->buildUrl($resource),
+            CURLOPT_URL => $this->buildUrl($uri),
             CURLOPT_HTTPHEADER => array
             (
                 'Content-type: application/json',
@@ -125,28 +125,22 @@ class ApiClient
             CURLOPT_SSL_VERIFYPEER => self::isSslCertsVerificationEnabled()
         );
 
+        // Se for passado parametro na query string, vamos concatenar eles na url
+        if ($queryStringData != null)
+        {
+            $options[CURLOPT_URL] .= '?'.http_build_query($queryStringData);
+        }
+
         // Associa o certificado para a verificação
         if (self::isSslCertsVerificationEnabled())
         {
             $options[CURLOPT_CAINFO] = dirname(__FILE__) . '/../data/ca-certificates.crt';
         }
 
-        switch ($method)
+        // Se o método http for post ou put e tiver dados para enviar no body
+        if (in_array($method, array(One\DataContract\Enum\ApiMethodEnum::POST, One\DataContract\Enum\ApiMethodEnum::PUT)) && $bodyData != null)
         {
-            case One\DataContract\Enum\ApiMethodEnum::POST:
-                $options[CURLOPT_POSTFIELDS] = json_encode($data);
-                break;
-            case One\DataContract\Enum\ApiMethodEnum::GET:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'&'.http_build_query($data);
-                break;
-            case One\DataContract\Enum\ApiMethodEnum::PUT:
-                $options[CURLOPT_POSTFIELDS] = json_encode($data);
-                break;
-            case One\DataContract\Enum\ApiMethodEnum::DELETE:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'&'.http_build_query($data);
-                break;
-            default:
-                throw new \Exception("Invalid http method.");
+            $options[CURLOPT_POSTFIELDS] = json_encode($bodyData);
         }
 
         return $options;
@@ -159,13 +153,13 @@ class ApiClient
      * @throws \Exception
      * @return mixed
      */
-    private function sendRequest($resource, $method, $data)
+    private function sendRequest($resource, $method, $bodyData = null, $queryString = null)
     {
         // Inicializa sessão cURL
         $curlSession = curl_init();
 
         // Define as opções da sessão
-        curl_setopt_array($curlSession, $this->getOptions($resource, $method, $data));
+        curl_setopt_array($curlSession, $this->getOptions($resource, $method, $bodyData, $queryString));
 
         // Dispara a requisição cURL
         $responseBody = curl_exec($curlSession);
@@ -175,7 +169,7 @@ class ApiClient
 
         // Fecha a sessão cURL
         curl_close($curlSession);
-        
+
         // Verifica se não obteve resposta
         if (!$responseBody) throw new \Exception("Error Processing Request", 1);
 
@@ -185,13 +179,18 @@ class ApiClient
         // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
         if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
         {
-            @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $data, $responseBody);
+                @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $queryString, $bodyData, $responseBody);
         }
 
         // Retorna a resposta
         return $response;
     }
 
+    /**
+     * @param One\DataContract\Request\CreateSaleRequest $createSaleRequest
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function createSale(One\DataContract\Request\CreateSaleRequest $createSaleRequest)
     {
         // Dispara a requisição
@@ -224,6 +223,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param One\DataContract\Request\CaptureRequest $captureRequest
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function capture(One\DataContract\Request\CaptureRequest $captureRequest)
     {
         // Dispara a requisição
@@ -253,6 +257,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param One\DataContract\Request\CancelRequest $cancelRequest
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function cancel(One\DataContract\Request\CancelRequest $cancelRequest)
     {
         // Dispara a requisição
@@ -290,8 +299,86 @@ class ApiClient
      * @param $responseBody
      * @throws One\DataContract\Report\ApiError
      */
-    private function handleApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody)
+    private function handleApiError($httpStatusCode, $requestKey, $errorCollection, $requestQueryStringData, $requestBodyData, $responseBody)
     {
-        throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody);
+        throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestQueryStringData, $requestBodyData, $responseBody);
+    }
+
+    /**
+     * @param $instantBuyKey
+     * @return BaseResponse
+     * @throws \Exception
+     */
+    public function GetInstantBuyDataByInstantBuyKey($instantBuyKey)
+    {
+        $resource = sprintf("creditcard/%s", $instantBuyKey);
+
+        // Dispara a requisição
+        $instantBuyKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $instantBuyKeyResponse);
+
+        // Retorna rsposta
+        return $response;
+    }
+
+    /**
+     * @param $buyerKey
+     * @return BaseResponse
+     * @throws \Exception
+     */
+    public function GetInstantBuyDataByBuyerKey($buyerKey)
+    {
+        $resource = sprintf("creditcard/%s/buyerkey", $buyerKey);
+
+        // Dispara a requisição
+        $instantBuyKeyByBuyerKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $instantBuyKeyByBuyerKeyResponse);
+
+        // Retorna rsposta
+        return $response;
+    }
+
+    /**
+     * @param $orderReference
+     * @return BaseResponse
+     * @throws \Exception
+     */
+    public function searchSaleByOrderReference($orderReference)
+    {
+        // Monta o parametro
+        $resource = sprintf("sale/query/orderreference=%s", $orderReference);
+
+        // Dispara a requisição
+        $queryResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $queryResponse);
+
+        // Retorna rsposta
+        return $response;
+    }
+
+    /**
+     * @param $orderKey
+     * @return BaseResponse
+     * @throws \Exception
+     */
+    public function searchSaleByOrderKey($orderKey)
+    {
+        // Monta o parametro
+        $resource = sprintf("sale/query/orderkey=%s", $orderKey);
+
+        // Dispara a requisição
+        $queryResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $queryResponse);
+
+        // Retorna rsposta
+        return $response;
     }
 }

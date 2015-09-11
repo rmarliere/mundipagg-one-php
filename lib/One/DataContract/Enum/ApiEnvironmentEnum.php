@@ -16,5 +16,10 @@ abstract class ApiEnvironmentEnum
     /**
      * Ambiente de testes
      */
-    const STAGING = 'staging';
+    const SANDBOX = 'sandbox';
+
+    /**
+     * Ambiente de testes
+     */
+    const INSPECTOR = 'inspector';
 }
