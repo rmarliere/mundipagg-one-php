@@ -31,21 +31,28 @@ class ApiError extends \Exception
     /**
      * @var
      */
-    public $requestData;
+    public $requestQueryStringData;
+
+    /**
+     * @var
+     */
+    public $requestBodyData;
 
     /**
      * @param string $httpStatusCode
-     * @param string $requestKey
-     * @param int $errorCollection
-     * @param \Exception $requestData
+     * @param int $requestKey
+     * @param \Exception $errorCollection
+     * @param $requestQueryStringData
+     * @param $requestBodyData
      * @param $responseBody
      */
-    function __construct($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody)
+    function __construct($httpStatusCode, $requestKey, $errorCollection, $requestQueryStringData, $requestBodyData, $responseBody)
     {
         $this->httpStatusCode = $httpStatusCode;
         $this->requestKey = $requestKey;
         $this->errorCollection = $errorCollection;
-        $this->requestData = $requestData;
+        $this->requestQueryStringData = $requestQueryStringData;
         $this->responseBody = $responseBody;
+        $this->requestBodyData = $requestBodyData;
     }
 }

@@ -179,14 +179,7 @@ class ApiClient
         // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
         if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
         {
-            if ($bodyData != null )
-            {
-                @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $bodyData, $responseBody);
-            }
-            else
-            {
-                @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $queryString, $responseBody);
-            }
+                @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $queryString, $bodyData, $responseBody);
         }
 
         // Retorna a resposta
@@ -306,9 +299,9 @@ class ApiClient
      * @param $responseBody
      * @throws One\DataContract\Report\ApiError
      */
-    private function handleApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody)
+    private function handleApiError($httpStatusCode, $requestKey, $errorCollection, $requestQueryStringData, $requestBodyData, $responseBody)
     {
-        throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody);
+        throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestQueryStringData, $requestBodyData, $responseBody);
     }
 
     /**
