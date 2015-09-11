@@ -179,8 +179,14 @@ class ApiClient
         // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
         if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
         {
-            if($bodyData != null ){ @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $bodyData, $responseBody);}
-            else { @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $queryString, $responseBody);}
+            if ($bodyData != null )
+            {
+                @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $bodyData, $responseBody);
+            }
+            else
+            {
+                @$this->handleApiError($httpStatusCode, $response->RequestKey, $response->ErrorReport, $queryString, $responseBody);
+            }
         }
 
         // Retorna a resposta
@@ -294,7 +300,7 @@ class ApiClient
     {
         $resource = sprintf("creditcard/%s", $instantBuyKey);
 
-        //Dispara a requisição
+        // Dispara a requisição
         $instantBuyKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
         // Cria objeto de resposta
@@ -308,7 +314,7 @@ class ApiClient
     {
         $resource = sprintf("creditcard/%s/buyerkey", $buyerKey);
 
-        //Dispara a requisição
+        // Dispara a requisição
         $instantBuyKeyByBuyerKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
         // Cria objeto de resposta
@@ -320,28 +326,26 @@ class ApiClient
 
     public function searchSaleByOrderReference($orderReference)
     {
-        //Monta o parametro
-        $data = array('OrderReference' => $orderReference);
+        // Monta o parametro
+        $resource = sprintf("sale/query/orderreference=%s", $orderReference);
 
-        $returnData = $this->returnQueryObject($data);
+        // Dispara a requisição
+        $queryResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
-        return $returnData;
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $queryResponse);
+
+        // Retorna rsposta
+        return $response;
     }
 
     public function searchSaleByOrderKey($orderKey)
     {
-        //Monta o parametro
-        $data = array('OrderKey' => $orderKey);
+        // Monta o parametro
+        $resource = sprintf("sale/query/orderkey=%s", $orderKey);
 
-        $returnData = $this->returnQueryObject($data);
-
-        return $returnData;
-    }
-
-    private function returnQueryObject($data)
-    {
-        //Dispara a requisição
-        $queryResponse = $this->sendRequest(ApiResourceEnum::QUERY, ApiMethodEnum::GET, $data);
+        // Dispara a requisição
+        $queryResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
         // Cria objeto de resposta
         $response = new BaseResponse(true, $queryResponse);

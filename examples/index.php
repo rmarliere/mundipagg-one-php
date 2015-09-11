@@ -174,9 +174,9 @@ try
     $apiClient = new MundiPagg\ApiClient();
 
     // Faz a chamada para criação do token
-    $createSaleResponse = $apiClient->createSale($createSaleRequest);
+    //$createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    //$response = $apiClient->GetInstantBuyDataByBuyerKey("424388EA-1019-4914-AA12-BEB548C004BD");
+    $response = $apiClient->searchSaleByOrderKey("42DCBB2E-E9AF-42FC-8239-C9038F661B5C");
 
     //print "<pre>";
     //echo var_dump($createSaleResponse, JSON_PRETTY_PRINT);
