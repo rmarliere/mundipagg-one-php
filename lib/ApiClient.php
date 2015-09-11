@@ -174,7 +174,7 @@ class ApiClient
         if (!$responseBody) throw new \Exception("Error Processing Request", 1);
 
         // Decodifica a resposta json
-        $response = json_decode($responseBody,true);
+        $response = json_decode($responseBody);
 
         // Verifica se o http status code for diferente de 2xx ou se a resposta teve erro
         if (!($httpStatusCode >= 200 && $httpStatusCode < 300) || !empty($response->ErrorReport))
@@ -193,6 +193,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param One\DataContract\Request\CreateSaleRequest $createSaleRequest
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function createSale(One\DataContract\Request\CreateSaleRequest $createSaleRequest)
     {
         // Dispara a requisição
@@ -225,6 +230,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param One\DataContract\Request\CaptureRequest $captureRequest
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function capture(One\DataContract\Request\CaptureRequest $captureRequest)
     {
         // Dispara a requisição
@@ -254,6 +264,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param One\DataContract\Request\CancelRequest $cancelRequest
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function cancel(One\DataContract\Request\CancelRequest $cancelRequest)
     {
         // Dispara a requisição
@@ -296,6 +311,11 @@ class ApiClient
         throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody);
     }
 
+    /**
+     * @param $instantBuyKey
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function GetInstantBuyDataByInstantBuyKey($instantBuyKey)
     {
         $resource = sprintf("creditcard/%s", $instantBuyKey);
@@ -310,6 +330,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param $buyerKey
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function GetInstantBuyDataByBuyerKey($buyerKey)
     {
         $resource = sprintf("creditcard/%s/buyerkey", $buyerKey);
@@ -324,6 +349,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param $orderReference
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function searchSaleByOrderReference($orderReference)
     {
         // Monta o parametro
@@ -339,6 +369,11 @@ class ApiClient
         return $response;
     }
 
+    /**
+     * @param $orderKey
+     * @return BaseResponse
+     * @throws \Exception
+     */
     public function searchSaleByOrderKey($orderKey)
     {
         // Monta o parametro
