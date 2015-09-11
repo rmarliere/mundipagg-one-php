@@ -13,4 +13,5 @@ abstract class ApiResourceEnum
     const CANCEL = 'sale/cancel';
     const RETRY = 'sale/retry';
     const QUERY = 'sale/query';
+    const INSTANTBUYKEY = 'creditcard';
 }

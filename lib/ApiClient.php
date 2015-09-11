@@ -131,7 +131,8 @@ class ApiClient
             $options[CURLOPT_CAINFO] = dirname(__FILE__) . '/../data/ca-certificates.crt';
         }
 
-        //echo "<br/> <br/> ".$this->buildUrl($resource).'/'.http_build_query($data)."<br/> <br/>";
+        //echo $this->buildUrl($resource)."<br/>";
+        //echo "<br/> <br/> ".$this->buildUrl($resource).'/'. str_replace("parametro=","",http_build_query($data))."<br/> <br/>";
 
         switch ($method)
         {
@@ -139,7 +140,7 @@ class ApiClient
                 $options[CURLOPT_POSTFIELDS] = json_encode($data);
                 break;
             case One\DataContract\Enum\ApiMethodEnum::GET:
-                $options[CURLOPT_URL] = $this->buildUrl($resource).'/'.http_build_query($data);
+                $options[CURLOPT_URL] = $this->buildUrl($resource).'/'. str_replace("parametro=","",http_build_query($data));
                 break;
             case One\DataContract\Enum\ApiMethodEnum::PUT:
                 $options[CURLOPT_POSTFIELDS] = json_encode($data);
@@ -152,6 +153,7 @@ class ApiClient
         }
         return $options;
     }
+
 
     /**
      * @param $resource
@@ -296,7 +298,23 @@ class ApiClient
         throw new One\DataContract\Report\ApiError($httpStatusCode, $requestKey, $errorCollection, $requestData, $responseBody);
     }
 
+    public function GetInstantBuyData($instantBuyKey)
+    {
+        $data = array('parametro' => $instantBuyKey);
 
+        //Dispara a requisição
+        $instantBuyKeyResponse = $this->sendRequest(ApiResourceEnum::INSTANTBUYKEY, ApiMethodEnum::GET, $data);
+
+        echo "<br/><br/>".$instantBuyKeyResponse->ErrorReport."<br/><br/>";
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $instantBuyKeyResponse);
+
+
+
+        // Retorna rsposta
+        return $response;
+    }
 
     public function searchSaleByOrderReference($orderReference)
     {

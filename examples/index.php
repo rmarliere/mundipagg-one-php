@@ -7,6 +7,7 @@ try
 {
     ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
     ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    //ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5");
 
     // Cria objeto de solicitação
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
@@ -175,7 +176,7 @@ try
     // Faz a chamada para criação do token
     //$createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    $response = $apiClient->searchSaleByOrderReference("e77ee686");
+    $response = $apiClient->GetInstantBuyData("424388EA-1019-4914-AA12-BEB548C004BD");
 
     //print "<pre>";
     //echo var_dump($response, JSON_PRETTY_PRINT);
