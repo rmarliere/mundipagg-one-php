@@ -10,7 +10,7 @@ use MundiPagg\One\DataContract\Enum\ApiMethodEnum;
 use MundiPagg\One\DataContract\Enum\ApiResourceEnum;
 use MundiPagg\One\DataContract\Response\BaseResponse;
 use MundiPagg\One\Helper\TransactionReportHelper;
-use MundiPagg\One\Helper\xmlPostParseHelper;
+use MundiPagg\One\Helper\XmlPostParseHelper;
 
 /**
  * Class ApiClient
@@ -389,7 +389,6 @@ class ApiClient
     /**
      * @param $reportDate
      * @param $filePath
-     * @return string
      */
     public function DownloadTransactionReportFile($reportDate, $filePath)
     {
@@ -400,14 +399,23 @@ class ApiClient
         $myFile = fopen($filePath . "\\" . $fileName, "w");
         fwrite($myFile, $reportResponse);
         fclose($myFile);
+    }
 
-        return '200 - OK';
+     /**
+     * @param $reportDate
+     * @return string
+     */
+    public function SearchTransactionReportFile($reportDate)
+    {
+        $reportResponse = $this->reportFileImplementation(date('Ymd', strtotime($reportDate)));
+
+        return $reportResponse;
     }
 
     /**
      * @param $reportDate
      */
-    public function searchTransactionReportFile($reportFileData)
+    public function ParseTransactionReportFile($reportFileData)
     {
         $response = new \MundiPagg\One\DataContract\TransactionReport\TransactionReport();
 

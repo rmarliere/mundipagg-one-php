@@ -14,7 +14,7 @@ try
     $request = new \MundiPagg\One\DataContract\Request\CancelRequest();
 
     // Define dados da requisição
-    $request->setOrderKey("47e80399-fe75-40cd-8c41-b6457b37e75e");
+    $request->setOrderKey("af03f1a7-bb7d-487a-af1b-5bf1631f1c9d");
 
     //Cria um objeto ApiClient
     $client = new MundiPagg\ApiClient();

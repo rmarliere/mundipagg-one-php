@@ -4,9 +4,9 @@ use MundiPagg\ApiClient;
 require_once(dirname(__FILE__) . '/../bootstrap.php');
 
 try {
-    //ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
-    ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
-    //ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5"); // SANDBOX MERCHANT
+    ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
+    // ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5"); // SANDBOX MERCHANT
     //ApiClient::setMerchantKey("41BE3484-9CD4-4332-98B1-145DAEBE7CCB"); // SANDBOX MERCHANT APIV1
 
     // Cria objeto de solicitação
@@ -162,7 +162,11 @@ try {
     $apiClient = new MundiPagg\ApiClient();
 
     // Faz a chamada para criação do token
-    //$createSaleResponse = $apiClient->createSale($createSaleRequest);
+    $createSaleResponse = $apiClient->createSale($createSaleRequest);
+
+    echo "<pre>";
+    echo var_dump($createSaleResponse);
+    echo "</pre>";
 
 
     //Criando Requisição do Retry
@@ -177,6 +181,9 @@ try {
 
     $retryRequest->addRetrySaleCreditCardTransactionCollection($creditCardTransaction);
 
+    echo "<pre>";
+    echo var_dump($retryRequest);
+    echo "</pre>";
 
     $xmlToPost = utf8_encode(utf8_encode('<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/MundiPagg.NotificationService.DataContract"
                     xmlns:i="http://www.w3.org/2001/XMLSchema-instance"
@@ -229,19 +236,22 @@ try {
 
     $apiClient->setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
 
-    //$postObject = $apiClient->ParseXmlToNotification($xmlToPost);
+    $postObject = $apiClient->ParseXmlToNotification($xmlToPost);
 
-    //echo '<pre>' . var_dump($postObject) . '<pre/>';
-    $apiClient->DownloadTransactionReportFile('20150321', 'C:\\Temp');
+    // echo '<pre>' . var_dump($postObject) . '<pre/>';
+    // $apiClient->DownloadTransactionReportFile('20150321', 'C:\\Temp');
 
     //$response = $apiClient->searchTransactionReportFile('20150321');
 
     //echo var_dump($response);
 
-    //$response = $apiClient->Retry($retryRequest);
+    // $response = $apiClient->Retry($retryRequest);
 
-    //$response = $apiClient->searchSaleByOrderKey("E7D25F8D-DABF-4D1F-824F-2ECA07E9B35B"); //Requisição do Query
+    $response = $apiClient->searchSaleByOrderKey("E7D25F8D-DABF-4D1F-824F-2ECA07E9B35B"); //Requisição do Query
 
+    echo "<pre>";
+    echo var_dump($response);
+    echo "</pre>";
     //$response = $apiClient->createSale($createSaleRequest); //Requisição do CreateSale
 
     //print "<pre>";
