@@ -1,7 +1,7 @@
 <?php
 use MundiPagg\ApiClient;
 
-require_once(dirname(__FILE__) . '/../bootstrap.php');
+require_once(dirname(__FILE__) . '/../init.php');
 
 try {
     ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);

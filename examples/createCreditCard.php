@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__) . '/../bootstrap.php');
+require_once(dirname(__FILE__) . '/../init.php');
 
 try
 {
@@ -8,7 +8,7 @@ try
     \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5");
+    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
 
     // Cria objeto requisição
     $request = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
