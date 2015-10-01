@@ -5,22 +5,16 @@ require_once(dirname(__FILE__) . '/../init.php');
 try
 {
     // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
+    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION);
 
     // Define a chave da loja
     \MundiPagg\ApiClient::setMerchantKey("merchantKey");
-
-    // Cria objeto requisição
-    $request = new \MundiPagg\One\DataContract\Request\CancelRequest();
-
-    // Define dados da requisição
-    $request->setOrderKey("af03f1a7-bb7d-487a-af1b-5bf1631f1c9d");
 
     //Cria um objeto ApiClient
     $client = new MundiPagg\ApiClient();
 
     // Faz a chamada para criação
-    $response = $client->cancel($request);
+    $response = $client->searchSaleByOrderKey("d45f99c9-ef85-4773-9926-1130b1b81fe5");
 
     // Imprime responsta
     print "<pre>";

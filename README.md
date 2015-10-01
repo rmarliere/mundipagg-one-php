@@ -16,13 +16,13 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 try
 {
     // Carrega dependências
-    require_once(dirname(__FILE__) . '/vendor/autoload.php');
+    require_once(dirname(__FILE__) . '/../init.php');
 
     // Define o ambiente utilizado (produção ou homologação)
     \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
 
     // Cria objeto requisição
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
@@ -98,7 +98,5 @@ finally
 
   http://docs.mundipagg.com
   
-## Other examples
-
-* [Capture](https://github.com/mundipagg/mundipagg-one-php/wiki/Capture-method)
-* [Cancel](https://github.com/mundipagg/mundipagg-one-php/wiki/Cancel-method)
+## More Information
+Access the SDK Wiki [HERE](https://github.com/mundipagg/mundipagg-one-php/wiki).

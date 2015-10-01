@@ -1,20 +1,20 @@
 <?php
 
-require_once(dirname(__FILE__) . '/../bootstrap.php');
+require_once(dirname(__FILE__) . '/../init.php');
 
 try
 {
     // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR);
+    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
 
     // Cria objeto requisição
     $request = new \MundiPagg\One\DataContract\Request\CaptureRequest();
 
     // Define dados da requisição
-    $request->setOrderKey("47e80399-fe75-40cd-8c41-b6457b37e75e");
+    $request->setOrderKey("af03f1a7-bb7d-487a-af1b-5bf1631f1c9d");
 
     //Cria um objeto ApiClient
     $client = new MundiPagg\ApiClient();
