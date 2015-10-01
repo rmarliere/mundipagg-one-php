@@ -1,7 +1,6 @@
 {
     "name": "mundipagg/mundipagg-one-php",
     "description": "MundiPaggg One PHP Library",
-    "version": "1.1.0",
     "keywords": ["mundipagg", "gateway", "pagamento"],
     "homepage": "http://mundipagg.com",
     "license": "MIT",
