@@ -159,6 +159,14 @@ class CreditCardTransaction extends BaseObject
     }
 
     /**
+     * @param \MundiPagg\One\DataContract\Request\CreateSaleRequestData\Recurrency $recurrency
+     */
+    public function setRecurrency(Recurrency $recurrency)
+    {
+        $this->Recurrency = $recurrency;
+    }
+
+    /**
      * @return string
      */
     public function getTransactionDateInMerchant()

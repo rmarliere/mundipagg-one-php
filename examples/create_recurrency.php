@@ -5,10 +5,10 @@ require_once(dirname(__FILE__) . '/../init.php');
 try
 {
     // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION);
+    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
+    \MundiPagg\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
     // Cria objeto requisição
     $request = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
@@ -49,10 +49,16 @@ try
     ->setPaymentMethodCode(\MundiPagg\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
     ->setSoftDescriptorText("TESTE");
 
+    // Recurrency do credit card transaction
+    $creditCardTransaction->getRecurrency()
+    ->setDateToStartBilling(new DateTime())
+    ->setFrequency(\MundiPagg\One\DataContract\Enum\FrequencyEnum::MONTHLY)
+    ->setInterval(1)
+    ->setRecurrences(2);
+
     // Dados do comprador
     $request->getBuyer()
     ->setName("Comprador Mundi")
-        //->setBuyerKey("61a86e1d-b132-4636-98ec-339cfe493c00")
     ->setPersonType(\MundiPagg\One\DataContract\Enum\PersonTypeEnum::COMPANY)
     ->setBuyerReference("123456")
     ->setBuyerCategory(\MundiPagg\One\DataContract\Enum\BuyerCategoryEnum::PLUS)
