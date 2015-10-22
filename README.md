@@ -1,13 +1,13 @@
-# MundiPagg One PHP Library
+# gateway One PHP Library
 
 ## Composer
 
-    $ composer require mundipagg/mundipagg-one-php dev-master
+    $ composer require gateway/gateway-one-php dev-master
 
 ## Manual installation
 
 ```php
-require __DIR__ . '/mundipagg-one-php/init.php';
+require __DIR__ . '/gateway-one-php/init.php';
 ```
 
 ## Getting started
@@ -19,27 +19,27 @@ try
     require_once(dirname(__FILE__) . '/../init.php');
 
     // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
+    \gateway\ApiClient::setEnvironment(\gateway\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
+    \gateway\ApiClient::setMerchantKey("merchantKey");
 
     // Cria objeto requisição
-    $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
+    $createSaleRequest = new \gateway\One\DataContract\Request\CreateSaleRequest();
 
     // Cria objeto do cartão de crédito
-    $creditCard = \MundiPagg\One\Helper\CreditCardHelper::createCreditCard("5555 4444 3333 2222", "MUNDIPAGG", "12/2030", "999");
+    $creditCard = \gateway\One\Helper\CreditCardHelper::createCreditCard("5555 4444 3333 2222", "gateway", "12/2030", "999");
 
     // Define dados do pedido
     $createSaleRequest->addCreditCardTransaction()
-        ->setPaymentMethodCode(\MundiPagg\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
-        ->setCreditCardOperation(\MundiPagg\One\DataContract\Enum\CreditCardOperationEnum::AUTH_AND_CAPTURE)
+        ->setPaymentMethodCode(\gateway\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
+        ->setCreditCardOperation(\gateway\One\DataContract\Enum\CreditCardOperationEnum::AUTH_AND_CAPTURE)
         ->setAmountInCents(150000)
         ->setCreditCard($creditCard);
         ;
 
     // Cria um objeto ApiClient
-    $apiClient = new \MundiPagg\ApiClient();
+    $apiClient = new \gateway\ApiClient();
 
     // Faz a chamada para criação
     $response = $apiClient->createSale($createSaleRequest);
@@ -48,12 +48,12 @@ try
     $httpStatusCode = $response->isSuccess() ? 201 : 401;
     $response = array("message" => $response->getData()->CreditCardTransactionResultCollection[0]->AcquirerMessage);
 }
-catch (\MundiPagg\One\DataContract\Report\CreditCardError $error)
+catch (\gateway\One\DataContract\Report\CreditCardError $error)
 {
     $httpStatusCode = 400;
     $response = array("message" => $error->getMessage());
 }
-catch (\MundiPagg\One\DataContract\Report\ApiError $error)
+catch (\gateway\One\DataContract\Report\ApiError $error)
 {
     $httpStatusCode = $error->errorCollection->ErrorItemCollection[0]->ErrorCode;
     $response = array("message" => $error->errorCollection->ErrorItemCollection[0]->Description);
@@ -96,7 +96,7 @@ finally
 
 ## Documentation
 
-  http://docs.mundipagg.com
+  http://docs.gateway.com
   
 ## More Information
-Access the SDK Wiki [HERE](https://github.com/mundipagg/mundipagg-one-php/wiki).
+Access the SDK Wiki [HERE](https://github.com/gateway/gateway-one-php/wiki).

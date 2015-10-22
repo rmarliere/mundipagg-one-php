@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Report;
+namespace gateway\One\DataContract\Report;
 
 /**
  * Class ApiError
- * @package MundiPagg\One\DataContract\Report
+ * @package gateway\One\DataContract\Report
  */
 class ApiError extends \Exception
 {

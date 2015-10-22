@@ -1,14 +1,14 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Request\CreateSaleRequestData;
+namespace gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
-use MundiPagg\One\DataContract\Common\Address;
-use MundiPagg\One\DataContract\Enum\CreditCardBrandEnum;
+use gateway\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\Address;
+use gateway\One\DataContract\Enum\CreditCardBrandEnum;
 
 /**
  * Class CreditCard
- * @package MundiPagg\One\DataContract\Request\CreateSaleRequestData
+ * @package gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class CreditCard extends BaseObject
 {
@@ -43,7 +43,7 @@ class CreditCard extends BaseObject
     protected $HolderName;
 
     /**
-     * @var string Token criado na MundiPagg que representa o ‘Cartão de Crédito’ utilizado previamente pelo cliente.
+     * @var string Token criado na gateway que representa o ‘Cartão de Crédito’ utilizado previamente pelo cliente.
      */
     protected $InstantBuyKey;
 

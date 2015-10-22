@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Enum;
+namespace gateway\One\DataContract\Enum;
 
 /**
  * Class ApiMethodEnum
- * @package MundiPagg\One\DataContract\Enum
+ * @package gateway\One\DataContract\Enum
  */
 abstract class ApiMethodEnum
 {

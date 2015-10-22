@@ -1,6 +1,6 @@
 <?php
 
-namespace MundiPagg;
+namespace gateway;
 
 /**
  * This class is an auto loader for use with vanilla PHP projects' testing environment. Use it in
@@ -141,4 +141,4 @@ class AutoLoader {
 }
 
 // Register our AutoLoad class as the system auto loader.
-spl_autoload_register(array('MundiPagg\AutoLoader', 'loadClass'));
+spl_autoload_register(array('gateway\AutoLoader', 'loadClass'));

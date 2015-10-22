@@ -6,11 +6,11 @@
  * Time: 15:29
  */
 
-namespace MundiPagg\One\DataContract\Enum;
+namespace gateway\One\DataContract\Enum;
 
 /**
  * Class OrderStatusEnum
- * @package MundiPagg\One\DataContract\Enum
+ * @package gateway\One\DataContract\Enum
  */
 abstract class OrderStatusEnum
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace MundiPagg\One\Helper;
+namespace gateway\One\Helper;
 
-use MundiPagg\One\DataContract\PostNotification\StatusNotification;
-use MundiPagg\One\DataContract\PostNotification\StatusNotificationData\BoletoTransactionNotification;
-use MundiPagg\One\DataContract\PostNotification\StatusNotificationData\CreditCardTransactionNotification;
-use MundiPagg\One\DataContract\PostNotification\StatusNotificationData\OnlineDebitTransactionNotification;
+use gateway\One\DataContract\PostNotification\StatusNotification;
+use gateway\One\DataContract\PostNotification\StatusNotificationData\BoletoTransactionNotification;
+use gateway\One\DataContract\PostNotification\StatusNotificationData\CreditCardTransactionNotification;
+use gateway\One\DataContract\PostNotification\StatusNotificationData\OnlineDebitTransactionNotification;
 
 class XmlPostParseHelper
 {

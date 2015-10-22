@@ -1,8 +1,8 @@
 <?php
 
-namespace MundiPagg\One;
+namespace gateway\One;
 
-use MundiPagg\One\DataContract\Request\CreateSaleRequestData\ShoppingCart;
+use gateway\One\DataContract\Request\CreateSaleRequestData\ShoppingCart;
 
 class ShoppingCartTest extends \PHPUnit_Framework_TestCase
 {

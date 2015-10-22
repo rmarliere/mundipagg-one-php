@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\DataContract\TransactionReport\TransactionReportData;
+namespace gateway\One\DataContract\TransactionReport\TransactionReportData;
 
 /**
  * Class OnlineDebitTransaction
- * @package MundiPagg\One\DataContract\TransactionReport\TransactionReportData
+ * @package gateway\One\DataContract\TransactionReport\TransactionReportData
  */
 class OnlineDebitTransaction
 {

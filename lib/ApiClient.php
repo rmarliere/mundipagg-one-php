@@ -1,20 +1,20 @@
 <?php
 
-namespace MundiPagg;
+namespace gateway;
 
 /**
  * Class ApiClient
- * @package MundiPagg
+ * @package gateway
  */
-use MundiPagg\One\DataContract\Enum\ApiMethodEnum;
-use MundiPagg\One\DataContract\Enum\ApiResourceEnum;
-use MundiPagg\One\DataContract\Response\BaseResponse;
-use MundiPagg\One\Helper\TransactionReportHelper;
-use MundiPagg\One\Helper\XmlPostParseHelper;
+use gateway\One\DataContract\Enum\ApiMethodEnum;
+use gateway\One\DataContract\Enum\ApiResourceEnum;
+use gateway\One\DataContract\Response\BaseResponse;
+use gateway\One\Helper\TransactionReportHelper;
+use gateway\One\Helper\XmlPostParseHelper;
 
 /**
  * Class ApiClient
- * @package MundiPagg
+ * @package gateway
  */
 class ApiClient
 {
@@ -22,6 +22,11 @@ class ApiClient
      * @var string
      */
     static private $merchantKey;
+
+    /**
+     * @var string
+     */
+    static private $baseUrl;
 
     /**
      * @var string
@@ -79,19 +84,15 @@ class ApiClient
      */
     private function getBaseUrl()
     {
-        switch (self::getEnvironment()) {
-            case One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION:
-                return 'https://transactionv2.mundipaggone.com';
-            case One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX:
-                return 'https://sandbox.mundipaggone.com';
-            case One\DataContract\Enum\ApiEnvironmentEnum::INSPECTOR:
-                return 'https://stagingv2-mundipaggone-com-9blwcrfjp9qk.runscope.net';
-            case One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT:
-                return 'https://api.mundipaggone.com';
+        return self::$baseUrl;
+    }
 
-            default:
-                throw new \Exception("The api environment was not defined.");
-        }
+    /**
+     * @param string $baseUrl
+     */
+    public static function setBaseUrl($baseUrl)
+    {
+        self::$baseUrl = $baseUrl;
     }
 
     /**
@@ -417,7 +418,7 @@ class ApiClient
      */
     public function ParseTransactionReportFile($reportFileData)
     {
-        $response = new \MundiPagg\One\DataContract\TransactionReport\TransactionReport();
+        $response = new \gateway\One\DataContract\TransactionReport\TransactionReport();
 
         foreach (preg_split("/((\r?\n)|(\r\n?))/", $reportFileData) as $line) {
             $lineProperties = explode(',', $line);

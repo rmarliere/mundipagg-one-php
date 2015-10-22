@@ -1,12 +1,12 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Common;
+namespace gateway\One\DataContract\Common;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class Address
- * @package MundiPagg\One\DataContract\Common
+ * @package gateway\One\DataContract\Common
  */
 class Address extends BaseObject
 {

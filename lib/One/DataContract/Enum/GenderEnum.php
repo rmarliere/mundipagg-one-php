@@ -1,14 +1,14 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Enum;
+namespace gateway\One\DataContract\Enum;
 
 /**
  * Class GenderEnum
- * @package MundiPagg\One\DataContract\Enum
+ * @package gateway\One\DataContract\Enum
  */
 /**
  * Class GenderEnum
- * @package MundiPagg\One
+ * @package gateway\One
  */
 abstract class GenderEnum
 {

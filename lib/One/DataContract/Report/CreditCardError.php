@@ -1,6 +1,6 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Report;
+namespace gateway\One\DataContract\Report;
 
 /**
  * Class CreditCardError

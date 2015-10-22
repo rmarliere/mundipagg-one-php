@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\DataContract\PostNotification\StatusNotificationData;
+namespace gateway\One\DataContract\PostNotification\StatusNotificationData;
 
 /**
  * Class OnlineDebitTransactionNotification
- * @package MundiPagg\One\DataContract\PostNotification\StatusNotificationData
+ * @package gateway\One\DataContract\PostNotification\StatusNotificationData
  */
 class OnlineDebitTransactionNotification
 {

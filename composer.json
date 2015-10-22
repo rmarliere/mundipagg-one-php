@@ -1,11 +1,11 @@
 {
-    "name": "mundipagg/mundipagg-one-php",
-    "description": "MundiPaggg One PHP Library",
-    "keywords": ["mundipagg", "gateway", "pagamento"],
-    "homepage": "http://mundipagg.com",
+    "name": "gateway/gateway-one-php",
+    "description": "gatewayg One PHP Library",
+    "keywords": ["gateway", "gateway", "pagamento"],
+    "homepage": "http://gateway.com",
     "license": "MIT",
     "autoload": {
-        "psr-4": { "MundiPagg\\" : "lib/" }
+        "psr-4": { "gateway\\" : "lib/" }
     },
     "require": {
         "php": ">=5.3",

@@ -1,15 +1,15 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Request\CreateSaleRequestData;
+namespace gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
-use MundiPagg\One\DataContract\Common\Address;
-use MundiPagg\One\DataContract\Enum\BuyerCategoryEnum;
-use MundiPagg\One\DataContract\Enum\EmailTypeEnum;
+use gateway\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\Address;
+use gateway\One\DataContract\Enum\BuyerCategoryEnum;
+use gateway\One\DataContract\Enum\EmailTypeEnum;
 
 /**
  * Class Buyer
- * @package MundiPagg\One\DataContract\Request\CreateSaleRequestData
+ * @package gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class Buyer extends BaseObject
 {

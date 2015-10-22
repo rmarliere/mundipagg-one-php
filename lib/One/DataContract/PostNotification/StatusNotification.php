@@ -1,11 +1,11 @@
 <?php
 
-namespace MundiPagg\One\DataContract\PostNotification;
-use MundiPagg\One\DataContract\Enum\OrderStatusEnum;
+namespace gateway\One\DataContract\PostNotification;
+use gateway\One\DataContract\Enum\OrderStatusEnum;
 
 /**
  * Class StatusNotification
- * @package MundiPagg\One\DataContract\PostNotification
+ * @package gateway\One\DataContract\PostNotification
  */
 class StatusNotification
 {

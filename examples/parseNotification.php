@@ -4,18 +4,12 @@ require_once(dirname(__FILE__) . '/../init.php');
 
 try
 {
-    // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::PRODUCTION);
-
-    // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
-
     //Cria um objeto ApiClient
-    $client = new MundiPagg\ApiClient();
+    $client = new gateway\ApiClient();
 
-    $xmlStatusNotification = utf8_encode(utf8_encode('<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/MundiPagg.NotificationService.DataContract"
+    $xmlStatusNotification = utf8_encode(utf8_encode('<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/gateway.NotificationService.DataContract"
         xmlns:i="http://www.w3.org/2001/XMLSchema-instance"
-        i:schemaLocation="http://schemas.datacontract.org/2004/07/MundiPagg.NotificationService.DataContract StatusNotificationXmlSchema.xsd">
+        i:schemaLocation="http://schemas.datacontract.org/2004/07/gateway.NotificationService.DataContract StatusNotificationXmlSchema.xsd">
         <AmountInCents>500</AmountInCents>
         <AmountPaidInCents>0</AmountPaidInCents>
         <BoletoTransaction>
@@ -62,16 +56,16 @@ try
         <OrderStatus>Paid</OrderStatus>
     </StatusNotification>'));
 
-$client->setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
+    $client->setEnvironment(\gateway\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
 
-$response = $client->ParseXmlToNotification($xmlStatusNotification);
+    $response = $client->ParseXmlToNotification($xmlStatusNotification);
 
-    // Imprime responsta
-print "<pre>";
-var_dump($response);
-print "</pre>";
+    // Imprime resposta
+    print "<pre>";
+    var_dump($response);
+    print "</pre>";
 }
-catch (\MundiPagg\One\DataContract\Report\ApiError $error)
+catch (\gateway\One\DataContract\Report\ApiError $error)
 {
     // Imprime json
     print "<pre>";

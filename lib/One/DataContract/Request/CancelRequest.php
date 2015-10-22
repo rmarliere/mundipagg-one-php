@@ -1,13 +1,13 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Request;
+namespace gateway\One\DataContract\Request;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
-use MundiPagg\One\DataContract\Common\ManageCreditCardTransaction;
+use gateway\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\ManageCreditCardTransaction;
 
 /**
  * Class CaptureRequest
- * @package MundiPagg\One\DataContract\Request
+ * @package gateway\One\DataContract\Request
  */
 class CancelRequest extends BaseObject
 {

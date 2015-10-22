@@ -1,12 +1,12 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Request;
+namespace gateway\One\DataContract\Request;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class CreateSaleRequest
- * @package MundiPagg\One\DataContract\Request
+ * @package gateway\One\DataContract\Request
  */
 class CreateSaleRequest extends BaseObject
 {

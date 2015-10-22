@@ -1,13 +1,13 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Request\CreateSaleRequestData;
+namespace gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
-use MundiPagg\One\DataContract\Common\Address;
+use gateway\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\Address;
 
 /**
  * Class ShoppingCart
- * @package MundiPagg\One\DataContract\Request\CreateSaleRequestData
+ * @package gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class ShoppingCart extends BaseObject
 {
@@ -129,7 +129,7 @@ class ShoppingCart extends BaseObject
     }
 
     /**
-     * @return \MundiPagg\One\ShoppingCartItem[]
+     * @return \gateway\One\ShoppingCartItem[]
      */
     public function getShoppingCartItemCollection()
     {

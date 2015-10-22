@@ -1,6 +1,6 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Response;
+namespace gateway\One\DataContract\Response;
 
 class CreateSaleResponse
 {

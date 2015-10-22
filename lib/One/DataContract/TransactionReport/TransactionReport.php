@@ -1,6 +1,6 @@
 <?php
 
-namespace MundiPagg\One\DataContract\TransactionReport;
+namespace gateway\One\DataContract\TransactionReport;
 
 
 class TransactionReport

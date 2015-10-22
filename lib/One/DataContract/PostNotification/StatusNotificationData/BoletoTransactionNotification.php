@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\DataContract\PostNotification\StatusNotificationData;
+namespace gateway\One\DataContract\PostNotification\StatusNotificationData;
 
 /**
  * Class BoletoTransactionNotification
- * @package MundiPagg\One\DataContract\PostNotification\StatusNotificationData
+ * @package gateway\One\DataContract\PostNotification\StatusNotificationData
  */
 class BoletoTransactionNotification
 {
@@ -14,7 +14,7 @@ class BoletoTransactionNotification
     public $AmountPaidInCents;
     /*@var [DateTime] Boleto Expiration Date */
     public $BoletoExpirationDate;
-    /*@var [long] MundiPagg Intern number */
+    /*@var [long] gateway Intern number */
     public $NossoNumero;
     /*@var [DateTime] Status Changed Date */
     public $StatusChangedDate;

@@ -1,6 +1,6 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Enum;
+namespace gateway\One\DataContract\Enum;
 
 abstract class CreditCardBrandEnum
 {

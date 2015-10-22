@@ -1,12 +1,12 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Common;
+namespace gateway\One\DataContract\Common;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class ManageCreditCardTransaction
- * @package MundiPagg\One\DataContract\Common
+ * @package gateway\One\DataContract\Common
  */
 class ManageCreditCardTransaction extends BaseObject
 {

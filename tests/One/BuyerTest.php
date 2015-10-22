@@ -1,8 +1,8 @@
 <?php
 
-namespace MundiPagg\One;
+namespace gateway\One;
 
-use MundiPagg\One\DataContract\Request\CreateSaleRequestData\Buyer;
+use gateway\One\DataContract\Request\CreateSaleRequestData\Buyer;
 
 class BuyerTest extends \PHPUnit_Framework_TestCase
 {

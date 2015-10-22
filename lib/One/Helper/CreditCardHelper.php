@@ -1,14 +1,14 @@
 <?php
 
-namespace MundiPagg\One\Helper;
+namespace gateway\One\Helper;
 
-use MundiPagg\One\DataContract\Enum\CreditCardBrandEnum;
-use MundiPagg\One\DataContract\Report\CreditCardError;
-use MundiPagg\One\DataContract\Request\CreateSaleRequestData\CreditCard;
+use gateway\One\DataContract\Enum\CreditCardBrandEnum;
+use gateway\One\DataContract\Report\CreditCardError;
+use gateway\One\DataContract\Request\CreateSaleRequestData\CreditCard;
 
 /**
  * Class CreditCardHelper
- * @package MundiPagg\One\Helper
+ * @package gateway\One\Helper
  */
 abstract class CreditCardHelper
 {

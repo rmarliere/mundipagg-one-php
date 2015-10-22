@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Enum;
+namespace gateway\One\DataContract\Enum;
 
 /**
  * Class CreditCardOperationEnum
- * @package MundiPagg\One\DataContract\Enum
+ * @package gateway\One\DataContract\Enum
  */
 abstract class CreditCardOperationEnum
 {
@@ -22,8 +22,8 @@ abstract class CreditCardOperationEnum
 
     /**
      * Realiza a pré-autorização do valor no cartão do cliente.
-     * A MundiPagg será responsável por realizar a operação de captura (Capture) para a confirmação da transação.
-     * A loja deverá ter uma url configurada na MundiPagg para ser notificada do sucesso ou falha da operação de captura
+     * A gateway será responsável por realizar a operação de captura (Capture) para a confirmação da transação.
+     * A loja deverá ter uma url configurada na gateway para ser notificada do sucesso ou falha da operação de captura
      */
     const AUTH_AND_CAPTURE_WITH_DELAY = 'AuthAndCaptureWithDelay';
 }

@@ -4,28 +4,28 @@ require_once(dirname(__FILE__) . '/../init.php');
 
 try
 {
-    // Define o ambiente utilizado (produção ou homologação)
-    \MundiPagg\ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
+    // Define a url utilizada
+    \gateway\ApiClient::setBaseUrl("url_here");
 
     // Define a chave da loja
-    \MundiPagg\ApiClient::setMerchantKey("merchantKey");
+    \gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
     // Cria objeto requisição
-    $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
+    $createSaleRequest = new \gateway\One\DataContract\Request\CreateSaleRequest();
 
     // Cria objeto do cartão de crédito
-    $creditCard = \MundiPagg\One\Helper\CreditCardHelper::createCreditCard("5555 4444 3333 2222", "MUNDIPAGG", "12/2030", "999");
+    $creditCard = \gateway\One\Helper\CreditCardHelper::createCreditCard("5555 4444 3333 2222", "gateway", "12/2030", "999");
 
     // Define dados do pedido
     $createSaleRequest->addCreditCardTransaction()
-        ->setPaymentMethodCode(\MundiPagg\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
-        ->setCreditCardOperation(\MundiPagg\One\DataContract\Enum\CreditCardOperationEnum::AUTH_ONLY)
+        ->setPaymentMethodCode(\gateway\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
+        ->setCreditCardOperation(\gateway\One\DataContract\Enum\CreditCardOperationEnum::AUTH_ONLY)
         ->setAmountInCents(1098) // R$ 10,98
         ->setCreditCard($creditCard);
         ;
 
     //Cria um objeto ApiClient
-    $apiClient = new MundiPagg\ApiClient();
+    $apiClient = new gateway\ApiClient();
 
     // Faz a chamada para criação
     $response = $apiClient->createSale($createSaleRequest);
@@ -34,12 +34,12 @@ try
     $httpStatusCode = $response->isSuccess() ? 201 : 401;
     $response = array("message" => $response->getData()->CreditCardTransactionResultCollection[0]->AcquirerMessage, "data" => $response->getData());
 }
-catch (\MundiPagg\One\DataContract\Report\CreditCardError $error)
+catch (\gateway\One\DataContract\Report\CreditCardError $error)
 {
     $httpStatusCode = 400;
     $response = array("message" => $error->getMessage());
 }
-catch (\MundiPagg\One\DataContract\Report\ApiError $error)
+catch (\gateway\One\DataContract\Report\ApiError $error)
 {
     $httpStatusCode = $error->errorCollection->ErrorItemCollection[0]->ErrorCode;
     $response = array("message" => $error->errorCollection->ErrorItemCollection[0]->Description);

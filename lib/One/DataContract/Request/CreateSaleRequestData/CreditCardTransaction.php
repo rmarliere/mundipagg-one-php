@@ -1,12 +1,12 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Request\CreateSaleRequestData;
+namespace gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class CreditCardTransaction
- * @package MundiPagg\One\DataContract\Request\CreateSaleRequestData
+ * @package gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class CreditCardTransaction extends BaseObject
 {
@@ -90,7 +90,7 @@ class CreditCardTransaction extends BaseObject
     }
 
     /**
-     * @param \MundiPagg\One\DataContract\Request\CreateSaleRequestData\CreditCard $creditCard
+     * @param \gateway\One\DataContract\Request\CreateSaleRequestData\CreditCard $creditCard
      */
     public function setCreditCard(CreditCard $creditCard)
     {
@@ -159,7 +159,7 @@ class CreditCardTransaction extends BaseObject
     }
 
     /**
-     * @param \MundiPagg\One\DataContract\Request\CreateSaleRequestData\Recurrency $recurrency
+     * @param \gateway\One\DataContract\Request\CreateSaleRequestData\Recurrency $recurrency
      */
     public function setRecurrency(Recurrency $recurrency)
     {

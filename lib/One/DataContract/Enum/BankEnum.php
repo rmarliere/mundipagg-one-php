@@ -6,7 +6,7 @@
  * Time: 16:22
  */
 
-namespace MundiPagg\One\DataContract\Enum;
+namespace gateway\One\DataContract\Enum;
 
 
 abstract class BankEnum

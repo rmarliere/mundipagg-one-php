@@ -1,6 +1,6 @@
 <phpunit bootstrap="bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="MundiPagg PHP Test Suite">
+        <testsuite name="gateway PHP Test Suite">
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>

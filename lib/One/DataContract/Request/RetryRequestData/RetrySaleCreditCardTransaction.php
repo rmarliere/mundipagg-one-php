@@ -6,13 +6,13 @@
  * Time: 14:54
  */
 
-namespace MundiPagg\One\DataContract\Request\RetryRequestData;
+namespace gateway\One\DataContract\Request\RetryRequestData;
 
-use MundiPagg\One\DataContract\Common\BaseObject;
+use gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class RetrySaleCreditCardTransaction
- * @package MundiPagg\One\DataContract\Request\RetryRequestData
+ * @package gateway\One\DataContract\Request\RetryRequestData
  */
 class RetrySaleCreditCardTransaction extends BaseObject
 {

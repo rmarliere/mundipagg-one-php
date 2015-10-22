@@ -1,14 +1,14 @@
 <?php
 
-namespace MundiPagg\One\DataContract\Response;
+namespace gateway\One\DataContract\Response;
 
 /**
  * Class BaseResponse
- * @package MundiPagg\One\DataContract\Response
+ * @package gateway\One\DataContract\Response
  */
 /**
  * Class BaseResponse
- * @package MundiPagg\One\DataContract\Response
+ * @package gateway\One\DataContract\Response
  */
 class BaseResponse
 {

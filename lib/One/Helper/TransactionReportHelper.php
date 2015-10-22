@@ -1,10 +1,10 @@
 <?php
 
-namespace MundiPagg\One\Helper;
+namespace gateway\One\Helper;
 
-use MundiPagg\One\DataContract\TransactionReport\TransactionReportData\TransactionReportCreditCardTransaction;
-use MundiPagg\One\DataContract\TransactionReport\TransactionReportData\TransactionReportOrder;
-use MundiPagg\One\DataContract\TransactionReport\TransactionReportData\Header;
+use gateway\One\DataContract\TransactionReport\TransactionReportData\TransactionReportCreditCardTransaction;
+use gateway\One\DataContract\TransactionReport\TransactionReportData\TransactionReportOrder;
+use gateway\One\DataContract\TransactionReport\TransactionReportData\Header;
 
 class TransactionReportHelper
 {
