@@ -18,11 +18,11 @@ try
     // Carrega dependências
     require_once(dirname(__FILE__) . '/../init.php');
 
-    // Define o ambiente utilizado (produção ou homologação)
-    \gateway\ApiClient::setEnvironment(\gateway\One\DataContract\Enum\ApiEnvironmentEnum::STAGING);
+    // Define a url utilizada
+    \gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
 
     // Define a chave da loja
-    \gateway\ApiClient::setMerchantKey("merchantKey");
+    \gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
     // Cria objeto requisição
     $createSaleRequest = new \gateway\One\DataContract\Request\CreateSaleRequest();
