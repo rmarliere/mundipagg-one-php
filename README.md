@@ -7,7 +7,7 @@
 ## Manual installation
 
 ```php
-require __DIR__ . '/gateway-one-php/init.php';
+require __DIR__ . '/mundipagg-one-php/init.php';
 ```
 
 ## Getting started
