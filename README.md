@@ -1,8 +1,8 @@
-# gateway One PHP Library
+# Mundipagg One PHP Library
 
 ## Composer
 
-    $ composer require gateway/gateway-one-php dev-master
+    $ composer require mundipagg/mundipagg-one-php dev-master
 
 ## Manual installation
 
