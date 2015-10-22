@@ -2,7 +2,7 @@
 
 ## Composer
 
-    $ composer require mundipagg/mundipagg-one-php dev-master
+    $ composer require mundipagg/mundipagg-one-php
 
 ## Manual installation
 
