@@ -16,7 +16,7 @@ require __DIR__ . '/mundipagg-one-php/init.php';
 try
 {
     // Carrega dependências
-    require_once(dirname(__FILE__) . '/../init.php');
+    require_once(dirname(__FILE__) . '/vendor/autoload.php');
 
     // Define a url utilizada
     \gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
