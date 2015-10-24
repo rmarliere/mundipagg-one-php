@@ -5,23 +5,23 @@ require_once(dirname(__FILE__) . '/../init.php');
 try
 {
     // Define a url utilizada
-    \gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
+    \Gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
 
     // Define a chave da loja
-    \gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
+    \Gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
     //Cria um objeto ApiClient
-    $client = new gateway\ApiClient();
+    $client = new Gateway\ApiClient();
 
     // Faz a chamada para criação
-    $response = $client->searchSaleByOrderKey("d45f99c9-ef85-4773-9926-1130b1b81fe5");
+    $response = $client->searchSaleByOrderKey("9aa2f7f2-2a69-4b9e-93ca-3ab866e26fb4");
 
     // Imprime resposta
     print "<pre>";
     print json_encode(array('success' => $response->isSuccess(), 'data' => $response->getData()), JSON_PRETTY_PRINT);
     print "</pre>";
 }
-catch (\gateway\One\DataContract\Report\ApiError $error)
+catch (\Gateway\One\DataContract\Report\ApiError $error)
 {
     // Imprime json
     print "<pre>";

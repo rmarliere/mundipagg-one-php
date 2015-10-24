@@ -1,10 +1,10 @@
 <?php
 
-namespace gateway\One\DataContract\TransactionReport\TransactionReportData;
+namespace Gateway\One\DataContract\TransactionReport\TransactionReportData;
 
 /**
  * Class OnlineDebitTransaction
- * @package gateway\One\DataContract\TransactionReport\TransactionReportData
+ * @package Gateway\One\DataContract\TransactionReport\TransactionReportData
  */
 class OnlineDebitTransaction
 {

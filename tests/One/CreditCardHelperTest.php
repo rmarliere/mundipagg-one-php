@@ -1,10 +1,10 @@
 <?php
 
-namespace gateway\One;
+namespace Gateway\One;
 
-use gateway\One\DataContract\Enum\CreditCardBrandEnum;
-use gateway\One\DataContract\Request\CreateSaleRequestData\CreditCard;
-use gateway\One\Helper\CreditCardHelper;
+use Gateway\One\DataContract\Enum\CreditCardBrandEnum;
+use Gateway\One\DataContract\Request\CreateSaleRequestData\CreditCard;
+use Gateway\One\Helper\CreditCardHelper;
 
 class CreditCardHelperTest extends \PHPUnit_Framework_TestCase
 {

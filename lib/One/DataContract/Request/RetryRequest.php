@@ -1,12 +1,12 @@
 <?php
 
-namespace gateway\One\DataContract\Request;
+namespace Gateway\One\DataContract\Request;
 
-use gateway\One\DataContract\Common\BaseObject;
+use Gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class RetryRequest
- * @package gateway\One\DataContract\Request
+ * @package Gateway\One\DataContract\Request
  */
 class RetryRequest extends BaseObject
 {

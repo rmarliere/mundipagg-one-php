@@ -1,10 +1,10 @@
 <?php
 
-namespace gateway\One\DataContract\Enum;
+namespace Gateway\One\DataContract\Enum;
 
 /**
  * Class PersonTypeEnum
- * @package gateway\One\DataContract\Enum
+ * @package Gateway\One\DataContract\Enum
  */
 abstract class PersonTypeEnum
 {

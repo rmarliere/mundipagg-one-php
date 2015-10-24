@@ -6,13 +6,13 @@
  * Time: 14:54
  */
 
-namespace gateway\One\DataContract\Request\RetryRequestData;
+namespace Gateway\One\DataContract\Request\RetryRequestData;
 
-use gateway\One\DataContract\Common\BaseObject;
+use Gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class RetrySaleCreditCardTransaction
- * @package gateway\One\DataContract\Request\RetryRequestData
+ * @package Gateway\One\DataContract\Request\RetryRequestData
  */
 class RetrySaleCreditCardTransaction extends BaseObject
 {

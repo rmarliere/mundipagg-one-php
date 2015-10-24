@@ -5,15 +5,15 @@ require_once(dirname(__FILE__) . '/../init.php');
 try
 {
     // Define a url utilizada
-    \gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
+    \Gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
 
     // Define a chave da loja
-    \gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
+    \Gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
     //Cria um objeto ApiClient
-    $client = new gateway\ApiClient();
+    $client = new Gateway\ApiClient();
 
-    $instantBuyKey = "37356b3f-32f8-405c-8fc2-1b66dd87547b";
+    $instantBuyKey = "139d4c3b-3215-4c1b-93eb-5b89e544336d";
 
     // Faz a chamada para criação
     $response = $client->GetInstantBuyDataByInstantBuyKey($instantBuyKey);
@@ -23,7 +23,7 @@ try
     print json_encode(array('success' => $response->isSuccess(), 'data' => $response->getData()), JSON_PRETTY_PRINT);
     print "</pre>";
 }
-catch (\gateway\One\DataContract\Report\ApiError $error)
+catch (\Gateway\One\DataContract\Report\ApiError $error)
 {
     // Imprime json
     print "<pre>";

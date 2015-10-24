@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../init.php');
 try
 {
     //Cria um objeto ApiClient
-    $client = new gateway\ApiClient();
+    $client = new Gateway\ApiClient();
 
     $xmlStatusNotification = utf8_encode(utf8_encode('<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/gateway.NotificationService.DataContract"
         xmlns:i="http://www.w3.org/2001/XMLSchema-instance"
@@ -56,7 +56,7 @@ try
         <OrderStatus>Paid</OrderStatus>
     </StatusNotification>'));
 
-    $client->setEnvironment(\gateway\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
+    $client->setEnvironment(\Gateway\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
 
     $response = $client->ParseXmlToNotification($xmlStatusNotification);
 
@@ -65,7 +65,7 @@ try
     var_dump($response);
     print "</pre>";
 }
-catch (\gateway\One\DataContract\Report\ApiError $error)
+catch (\Gateway\One\DataContract\Report\ApiError $error)
 {
     // Imprime json
     print "<pre>";

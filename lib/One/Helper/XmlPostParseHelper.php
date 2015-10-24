@@ -1,11 +1,11 @@
 <?php
 
-namespace gateway\One\Helper;
+namespace Gateway\One\Helper;
 
-use gateway\One\DataContract\PostNotification\StatusNotification;
-use gateway\One\DataContract\PostNotification\StatusNotificationData\BoletoTransactionNotification;
-use gateway\One\DataContract\PostNotification\StatusNotificationData\CreditCardTransactionNotification;
-use gateway\One\DataContract\PostNotification\StatusNotificationData\OnlineDebitTransactionNotification;
+use Gateway\One\DataContract\PostNotification\StatusNotification;
+use Gateway\One\DataContract\PostNotification\StatusNotificationData\BoletoTransactionNotification;
+use Gateway\One\DataContract\PostNotification\StatusNotificationData\CreditCardTransactionNotification;
+use Gateway\One\DataContract\PostNotification\StatusNotificationData\OnlineDebitTransactionNotification;
 
 class XmlPostParseHelper
 {

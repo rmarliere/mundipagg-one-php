@@ -1,15 +1,15 @@
 <?php
 
-namespace gateway\One\DataContract\Request\CreateSaleRequestData;
+namespace Gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use gateway\One\DataContract\Common\BaseObject;
-use gateway\One\DataContract\Common\Address;
-use gateway\One\DataContract\Enum\BuyerCategoryEnum;
-use gateway\One\DataContract\Enum\EmailTypeEnum;
+use Gateway\One\DataContract\Common\BaseObject;
+use Gateway\One\DataContract\Common\Address;
+use Gateway\One\DataContract\Enum\BuyerCategoryEnum;
+use Gateway\One\DataContract\Enum\EmailTypeEnum;
 
 /**
  * Class Buyer
- * @package gateway\One\DataContract\Request\CreateSaleRequestData
+ * @package Gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class Buyer extends BaseObject
 {

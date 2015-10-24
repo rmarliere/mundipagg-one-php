@@ -1,14 +1,14 @@
 <?php
 
-namespace gateway\One\DataContract\Request\CreateSaleRequestData;
+namespace Gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use gateway\One\DataContract\Common\BaseObject;
-use gateway\One\DataContract\Common\Address;
-use gateway\One\DataContract\Enum\CreditCardBrandEnum;
+use Gateway\One\DataContract\Common\BaseObject;
+use Gateway\One\DataContract\Common\Address;
+use Gateway\One\DataContract\Enum\CreditCardBrandEnum;
 
 /**
  * Class CreditCard
- * @package gateway\One\DataContract\Request\CreateSaleRequestData
+ * @package Gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class CreditCard extends BaseObject
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace gateway\One\DataContract\PostNotification\StatusNotificationData;
+namespace Gateway\One\DataContract\PostNotification\StatusNotificationData;
 
 /**
  * Class OnlineDebitTransactionNotification
- * @package gateway\One\DataContract\PostNotification\StatusNotificationData
+ * @package Gateway\One\DataContract\PostNotification\StatusNotificationData
  */
 class OnlineDebitTransactionNotification
 {

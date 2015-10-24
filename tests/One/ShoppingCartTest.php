@@ -1,8 +1,8 @@
 <?php
 
-namespace gateway\One;
+namespace Gateway\One;
 
-use gateway\One\DataContract\Request\CreateSaleRequestData\ShoppingCart;
+use Gateway\One\DataContract\Request\CreateSaleRequestData\ShoppingCart;
 
 class ShoppingCartTest extends \PHPUnit_Framework_TestCase
 {

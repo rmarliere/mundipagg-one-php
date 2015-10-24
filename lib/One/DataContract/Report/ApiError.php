@@ -1,10 +1,10 @@
 <?php
 
-namespace gateway\One\DataContract\Report;
+namespace Gateway\One\DataContract\Report;
 
 /**
  * Class ApiError
- * @package gateway\One\DataContract\Report
+ * @package Gateway\One\DataContract\Report
  */
 class ApiError extends \Exception
 {

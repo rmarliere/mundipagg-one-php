@@ -1,6 +1,6 @@
 <?php
 
-namespace gateway\One\DataContract\Enum;
+namespace Gateway\One\DataContract\Enum;
 
 abstract class CreditCardBrandEnum
 {

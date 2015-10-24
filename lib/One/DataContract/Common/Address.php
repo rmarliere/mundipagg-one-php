@@ -1,12 +1,12 @@
 <?php
 
-namespace gateway\One\DataContract\Common;
+namespace Gateway\One\DataContract\Common;
 
-use gateway\One\DataContract\Common\BaseObject;
+use Gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class Address
- * @package gateway\One\DataContract\Common
+ * @package Gateway\One\DataContract\Common
  */
 class Address extends BaseObject
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace gateway\One\DataContract\TransactionReport;
+namespace Gateway\One\DataContract\TransactionReport;
 
 
 class TransactionReport

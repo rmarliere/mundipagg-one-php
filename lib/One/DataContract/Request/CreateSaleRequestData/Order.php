@@ -1,12 +1,12 @@
 <?php
 
-namespace gateway\One\DataContract\Request\CreateSaleRequestData;
+namespace Gateway\One\DataContract\Request\CreateSaleRequestData;
 
-use gateway\One\DataContract\Common\BaseObject;
+use Gateway\One\DataContract\Common\BaseObject;
 
 /**
  * Class Order
- * @package gateway\One\DataContract\Request\CreateSaleRequestData
+ * @package Gateway\One\DataContract\Request\CreateSaleRequestData
  */
 class Order extends BaseObject
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace gateway;
+namespace Gateway;
 
 /**
  * This class is an auto loader for use with vanilla PHP projects' testing environment. Use it in
