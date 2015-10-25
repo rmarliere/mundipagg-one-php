@@ -5,7 +5,7 @@
     "homepage": "http://mundipagg.com",
     "license": "MIT",
     "autoload": {
-        "psr-4": { "mundipagg\\" : "lib/" }
+        "psr-4": { "Gateway\\" : "lib/" }
     },
     "require": {
         "php": ">=5.3",
