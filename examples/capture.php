@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../init.php');
 try
 {
     // Define a url utilizada
-    \Gateway\ApiClient::setBaseUrl("https://transaction.stone.com.br");
+    \Gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
 
     // Define a chave da loja
     \Gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
@@ -21,10 +21,6 @@ try
 
     // Faz a chamada para criação
     $response = $client->capture($request);
-
-    print "<pre>";
-    print json_encode($response, JSON_PRETTY_PRINT);
-    print "</pre>";
 
     // Imprime resposta
     print "<pre>";
