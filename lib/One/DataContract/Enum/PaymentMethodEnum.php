@@ -4,6 +4,7 @@ namespace Gateway\One\DataContract\Enum;
 
 abstract class PaymentMethodEnum
 {
+    const AUTO = 0;
     const SIMULATOR = 1;
     const REDECARD_KOMERCI_STAGING = 3;
     const REDECARD_KOMERCI = 3;
