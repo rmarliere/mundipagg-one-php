@@ -19,27 +19,27 @@ try
     require_once(dirname(__FILE__) . '/vendor/autoload.php');
 
     // Define a url utilizada
-    \gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
+    \Gateway\ApiClient::setBaseUrl("https://sandbox.mundipaggone.com");
 
     // Define a chave da loja
-    \gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
+    \Gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
     // Cria objeto requisição
-    $createSaleRequest = new \gateway\One\DataContract\Request\CreateSaleRequest();
+    $createSaleRequest = new \Gateway\One\DataContract\Request\CreateSaleRequest();
 
     // Cria objeto do cartão de crédito
-    $creditCard = \gateway\One\Helper\CreditCardHelper::createCreditCard("5555 4444 3333 2222", "gateway", "12/2030", "999");
+    $creditCard = \Gateway\One\Helper\CreditCardHelper::createCreditCard("5555 4444 3333 2222", "gateway", "12/2030", "999");
 
     // Define dados do pedido
     $createSaleRequest->addCreditCardTransaction()
-        ->setPaymentMethodCode(\gateway\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
-        ->setCreditCardOperation(\gateway\One\DataContract\Enum\CreditCardOperationEnum::AUTH_AND_CAPTURE)
+        ->setPaymentMethodCode(\Gateway\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
+        ->setCreditCardOperation(\Gateway\One\DataContract\Enum\CreditCardOperationEnum::AUTH_AND_CAPTURE)
         ->setAmountInCents(150000)
         ->setCreditCard($creditCard);
         ;
 
     // Cria um objeto ApiClient
-    $apiClient = new \gateway\ApiClient();
+    $apiClient = new \Gateway\ApiClient();
 
     // Faz a chamada para criação
     $response = $apiClient->createSale($createSaleRequest);
@@ -48,12 +48,12 @@ try
     $httpStatusCode = $response->isSuccess() ? 201 : 401;
     $response = array("message" => $response->getData()->CreditCardTransactionResultCollection[0]->AcquirerMessage);
 }
-catch (\gateway\One\DataContract\Report\CreditCardError $error)
+catch (\Gateway\One\DataContract\Report\CreditCardError $error)
 {
     $httpStatusCode = 400;
     $response = array("message" => $error->getMessage());
 }
-catch (\gateway\One\DataContract\Report\ApiError $error)
+catch (\Gateway\One\DataContract\Report\ApiError $error)
 {
     $httpStatusCode = $error->errorCollection->ErrorItemCollection[0]->ErrorCode;
     $response = array("message" => $error->errorCollection->ErrorItemCollection[0]->Description);
