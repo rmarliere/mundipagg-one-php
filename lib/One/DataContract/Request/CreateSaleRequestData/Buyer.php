@@ -74,6 +74,11 @@ class Buyer extends BaseObject
     protected $MobilePhone;
 
     /**
+     * string Telefone de trabalho do comprador
+     */
+    protected $WorkPhone;
+
+    /**
      * @var string Data de nascimento do comprador
      */
     protected $BirthDate;
@@ -338,6 +343,25 @@ class Buyer extends BaseObject
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getWorkPhone()
+    {
+        return $this->WorkPhone;
+    }
+
+    /**
+     * @param string $workPhone
+     * @return $this
+     */
+    public function setWorkPhone($workPhone)
+    {
+        $this->WorkPhone = $workPhone;
+
+        return $this;
+    }    
 
     /**
      * @return string

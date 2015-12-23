@@ -62,6 +62,7 @@ try
     ->setGender(\Gateway\One\DataContract\Enum\GenderEnum::MALE)
     ->setHomePhone("3003-0460")
     ->setMobilePhone("99999-8888")
+    ->setWorkPhone("99999-7777")
     ->setBirthDate(\DateTime::createFromFormat('d/m/Y', '11/05/1990'))
     ->setFacebookId("1234567890")
     ->setTwitterId("1234567890")
