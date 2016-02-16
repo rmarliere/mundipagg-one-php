@@ -229,6 +229,33 @@ class ApiClient
         return $response;
     }
 
+    public function createBuyer (One\DataContract\Request\CreateSaleRequestData\BuyerContract $buyerContract)
+    {
+        // Dispara a requisição
+        $buyerContractResponse = $this->sendRequest(ApiMethodEnum::POST, $buyerContract->getData());
+
+         // Cria objeto de resposta
+        $response = new BaseResponse($buyerContractResponse->Sucess, $buyerContractResponse);
+
+        // Retorna reposta
+        return $response;
+    }
+
+    private function getBuyer ($buyerKey)
+    {
+        // Monta o parametro
+        $resource = sprintf("Buyer/%s", $buyerKey);
+
+        // Dispara a requisição
+        $buyerResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse(true, $buyerResponse);
+
+        // Retorna rsposta
+        return $response;
+    }
+
     /**
      * @param One\DataContract\Request\CaptureRequest $captureRequest
      * @return BaseResponse
@@ -258,6 +285,7 @@ class ApiClient
         // Retorna rsposta
         return $response;
     }
+
 
     /**
      * @param One\DataContract\Request\CancelRequest $cancelRequest
