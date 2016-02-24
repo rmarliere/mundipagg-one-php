@@ -1,6 +1,6 @@
 <?php
 
-namespace Gateway\One\DataContract\Request\CreateSaleRequestData;
+namespace Gateway\One\DataContract\Request;
 
 use Gateway\One\DataContract\Common\BaseObject;
 use Gateway\One\DataContract\Common\Address;
@@ -11,13 +11,13 @@ use Gateway\One\DataContract\Enum\EmailTypeEnum;
  * Class Buyer
  * @package Gateway\One\DataContract\Request\CreateSaleRequestData
  */
-class BuyerContract extends BaseObject
+class CreateBuyerRequest extends BaseObject
 {
 
     /**
      * @var string Data de nascimento do comprador
      */
-    protected $BirthDate;
+    protected $Birthdate;
 
     /**
      * @var string Identificação do comprador na plataforma One
@@ -73,11 +73,6 @@ class BuyerContract extends BaseObject
      * @var string Telefone residencial do comprador
      */
     protected $HomePhone;
-
-    /**
-     * @var string Endereço de IP
-     */
-    protected $ipAdress;
 
     /**
      * @var Data da última atualização do cadastro do comprador na plataforma da loja
@@ -335,18 +330,18 @@ class BuyerContract extends BaseObject
     /**
      * @return string 
      */
-    public function getIpAdress()
+    public function getIpAddress()
     {
         return $this->IpAdress;
     }
 
     /**
-     * @param string $ipAdress
+     * @param string $ipAddress
      * @return $this
      */
-    public function setIpAdress($ipAdress)
+    public function setIpAddress($ipAddress)
     {
-        $this->IpAdress = $ipAdress;
+        $this->IpAdress = $ipAddress;
 
         return $this;
     }
@@ -394,16 +389,16 @@ class BuyerContract extends BaseObject
      */
     public function getBirthDate()
     {
-        return \DateTime::createFromFormat('Y-m-d\TH:i:s', $this->BirthDate);
+        return $this->Birthdate;
     }
 
     /**
-     * @param \DateTime $birthDate
+     * @param string $birthDate
      * @return $this
      */
-    public function setBirthDate(\DateTime $birthDate)
+    public function setBirthDate($birthDate)
     {
-        $this->BirthDate = $birthDate->format('Y-m-d\TH:i:s');
+        $this->Birthdate = $birthDate;
 
         return $this;
     }

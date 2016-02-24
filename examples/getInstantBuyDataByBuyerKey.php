@@ -1,5 +1,4 @@
 <?php
-
 require_once(dirname(__FILE__) . '/../init.php');
 
 try
@@ -13,10 +12,10 @@ try
     //Cria um objeto ApiClient
     $client = new Gateway\ApiClient();
 
-    $instantBuyKey = "04728dc3-5e0c-47c2-b6b7-9b5c421add09";
+    $buyerKey = "460b3d1d-5c13-4f40-92db-36aa05729c79";
 
     // Faz a chamada para criação
-    $response = $client->GetInstantBuyDataByInstantBuyKey($instantBuyKey);
+    $response = $client->GetInstantBuyDataByBuyerKey($buyerKey);
 
     // Imprime responsta
     print "<pre>";

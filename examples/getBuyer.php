@@ -10,52 +10,52 @@ try
     // Define a chave da loja
     \Gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
 
-    // Cria objeto requisição
-    $request = new \Gateway\One\DataContract\Request\CreateBuyerRequest();
-    
-    $request
-    ->setBirthdate('1990-08-20T00:00:00')
-    ->setBuyerCategory(\Gateway\One\DataContract\Enum\BuyerCategoryEnum::PLUS)
-    ->setBuyerReference("C3PO")
-    ->setCreateDateInMerchant(new \DateTime())
-    ->setDocumentNumber("12345678901")
-    ->setDocumentType(\Gateway\One\DataContract\Enum\DocumentTypeEnum::CPF)
-    ->setEmail("lskywalker@r2d2.com")
-    ->setEmailType(\Gateway\One\DataContract\Enum\EmailTypeEnum::PERSONAL)
-    ->setFacebookId("1234567890")
-    ->setGender(\Gateway\One\DataContract\Enum\GenderEnum::MALE)
-    ->setHomePhone("(21)123456789")
-    ->setLastBuyerUpdateInMerchant(new \DateTime())
-    ->setMobilePhone("(21)987654321")
-    ->setName("Luke Skywalker")
-    ->setPersonType(\Gateway\One\DataContract\Enum\PersonTypeEnum::PERSON)
-    ->setTwitterId("1234567890")
-    ->setWorkPhone("(21)28467902")
-    ->addAddress()
-    ->setAddressType(\Gateway\One\DataContract\Enum\AddressTypeEnum::COMMERCIAL)
-    ->setStreet("Mos Eisley Cantina")
-    ->setNumber("123")
-    ->setComplement("")
-    ->setDistrict("Mos Eisley")
-    ->setCity("Tatooine")
-    ->setState("RJ")
-    ->setZipCode("20001000")
-    ->setCountry(\Gateway\One\DataContract\Enum\CountryEnum::BRAZIL);
-    
     //Cria um objeto ApiClient
     $client = new Gateway\ApiClient();
     
-    //var_dump($request->getData());exit;
-
+    $request = new \Gateway\One\DataContract\Request\CreateBuyerRequest();
+    
+    $request
+    ->setBirthDate(\DateTime::createFromFormat('d/m/Y', '11/05/1990'))
+    ->setBuyerCategory(\Gateway\One\DataContract\Enum\BuyerCategoryEnum::PLUS)
+    ->setBuyerReference("123456")
+    ->setCreateDateInMerchant(new \DateTime())
+    ->setDocumentNumber("58828172000138")
+    ->setDocumentType(\Gateway\One\DataContract\Enum\DocumentTypeEnum::CNPJ)
+    ->setEmail("comprador@gateway.com")
+    ->setEmailType(\Gateway\One\DataContract\Enum\EmailTypeEnum::COMERCIAL)
+    ->setFacebookId("1234567890")
+    ->setGender(\Gateway\One\DataContract\Enum\GenderEnum::MALE)
+    ->setHomePhone("3003-0460")
+    ->setIpAddress("192.168.0.1")
+    ->setLastBuyerUpdateInMerchant(new \DateTime())
+    ->setMobilePhone("99999-8888")
+    ->setName("Comprador Mundi")
+    ->setPersonType(\Gateway\One\DataContract\Enum\PersonTypeEnum::COMPANY)
+    ->setTwitterId("1234567890")
+    ->setWorkPhone("99999-7777")
+    ->addAddress()
+    ->setAddressType(\Gateway\One\DataContract\Enum\AddressTypeEnum::COMMERCIAL)
+    ->setStreet("Rua da Quitanda")
+    ->setNumber("199")
+    ->setComplement("10º andar")
+    ->setDistrict("Centro")
+    ->setCity("Rio de Janeiro")
+    ->setState("RJ")
+    ->setZipCode("20091005")
+    ->setCountry(\Gateway\One\DataContract\Enum\CountryEnum::BRAZIL);
+    
     // Faz a chamada para criação
-    $response = $client->createBuyer($request);
-        
-    // Imprime resposta
+    $responseBuyer = $client->createBuyer($request);
+    
+    $response = $client->getBuyer($responseBuyer->getData()->BuyerKey); 
+    
+     // Imprime json
     print "<pre>";
-    print json_encode(array('success' => $response->isSuccess(), 'data' => $response->getData()), JSON_PRETTY_PRINT);
+    print json_encode($response->getData(), JSON_PRETTY_PRINT);
     print "</pre>";
-}
-catch (\Gateway\One\DataContract\Report\ApiError $error)
+	
+} catch (\Gateway\One\DataContract\Report\ApiError $error)
 {
     // Imprime json
     print "<pre>";
