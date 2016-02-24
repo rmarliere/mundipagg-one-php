@@ -146,10 +146,9 @@ class ApiClient
         }
 
         // Se o método http for post ou put e tiver dados para enviar no body
-        if (in_array($method, array(One\DataContract\Enum\ApiMethodEnum::POST, One\DataContract\Enum\ApiMethodEnum::PUT)) && $bodyData != null) {
+        if (in_array($method, array(One\DataContract\Enum\ApiMethodEnum::POST, One\DataContract\Enum\ApiMethodEnum::PUT, One\DataContract\Enum\ApiMethodEnum::PATCH)) && $bodyData != null) {
             $options[CURLOPT_POSTFIELDS] = json_encode($bodyData);
         }
-
         return $options;
     }
 
@@ -229,6 +228,60 @@ class ApiClient
         return $response;
     }
 
+    public function createBuyer(One\DataContract\Request\CreateBuyerRequest $buyerContract)
+    {
+        //var_dump($buyerContract->getBirthDate());
+        //exit;
+        // Dispara a requisição
+        $buyerRequest = $this->sendRequest("Buyer/", ApiMethodEnum::POST, $buyerContract->getData());
+        
+       
+         // Cria objeto de resposta
+        $response = new BaseResponse($buyerRequest->Success, $buyerRequest);  
+        
+         // Retorna reposta
+        return $response;
+    }
+
+    public function getBuyer ($buyerKey)
+    {
+        $resource = "Buyer/" . $buyerKey;
+        
+        
+        // Dispara a requisição
+        $buyerResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($buyerResponse->Success, $buyerResponse);
+
+        // Retorna rsposta
+        return $response;
+    }
+    
+    public function createCreditCard(One\DataContract\Request\CreateInstantBuyDataRequest $createInstantBuyDataRequest)
+    {   
+        // Dispara a requisição
+        $createCreditCardResponse = $this->sendRequest("CreditCard/", ApiMethodEnum::POST, $createInstantBuyDataRequest->getData());
+        
+        // Cria objeto de resposta
+        $response = new BaseResponse($createCreditCardResponse->Success, $createCreditCardResponse);
+
+        return $response;
+    }
+    
+    public function deleteCreditCard($instantBuyKey)
+    {
+        $resource = sprintf("creditcard/%s", $instantBuyKey);
+        
+        // Dispara a requisição
+        $deleteCreditCardResponse = $this->sendRequest($resource, ApiMethodEnum::DELETE);
+        
+        // Cria objeto de resposta
+        $response = new BaseResponse($deleteCreditCardResponse->Success, $deleteCreditCardResponse);
+        
+        return $response;
+    }
+
     /**
      * @param One\DataContract\Request\CaptureRequest $captureRequest
      * @return BaseResponse
@@ -258,6 +311,7 @@ class ApiClient
         // Retorna rsposta
         return $response;
     }
+
 
     /**
      * @param One\DataContract\Request\CancelRequest $cancelRequest
@@ -307,15 +361,23 @@ class ApiClient
      * @return BaseResponse
      * @throws \Exception
      */
-    public function GetInstantBuyDataByInstantBuyKey($instantBuyKey)
-    {
+    public function GetInstantBuyDataByInstantBuyKey($instantBuyKey) {
+        return $this->getCreditCard($instantBuyKey);
+    }
+    
+    public function getCreditCard($instantBuyKey) {
         $resource = sprintf("creditcard/%s", $instantBuyKey);
 
         // Dispara a requisição
-        $instantBuyKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+        $getCreditCardResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
         // Cria objeto de resposta
-        $response = new BaseResponse(true, $instantBuyKeyResponse);
+        if ($getCreditCardResponse->ErrorReport == null) {
+            $isSuccess = true;
+        } else {
+            $isSuccess = false;
+        }
+        $response = new BaseResponse($isSuccess, $getCreditCardResponse);
 
         // Retorna rsposta
         return $response;
@@ -326,17 +388,39 @@ class ApiClient
      * @return BaseResponse
      * @throws \Exception
      */
-    public function GetInstantBuyDataByBuyerKey($buyerKey)
-    {
-        $resource = sprintf("creditcard/%s/buyerkey", $buyerKey);
+    public function GetInstantBuyDataByBuyerKey($buyerKey) {
+        return $this->getCreditCardWithBuyerKey($buyerKey);
+    }
+    
+    public function getCreditCardWithBuyerKey($buyerKey) {
+        $resource = sprintf("creditcard/BuyerKey=%s", $buyerKey);
 
         // Dispara a requisição
-        $instantBuyKeyByBuyerKeyResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
+        $getCreditCardResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
         // Cria objeto de resposta
-        $response = new BaseResponse(true, $instantBuyKeyByBuyerKeyResponse);
+        if ($getCreditCardResponse->ErrorReport == null) {
+            $isSuccess = true;
+        } else {
+            $isSuccess = false;
+        }
+        $response = new BaseResponse($isSuccess, $getCreditCardResponse);
 
         // Retorna rsposta
+        return $response;
+    }
+    
+    public function updateInstantBuyData($instantBuyKey, One\DataContract\Request\UpdateInstantBuyDataRequest $updateBuyerKeyRequest)
+    {
+        $resource = sprintf("creditcard/%s", $instantBuyKey);
+        
+        //Dispara a requisição
+        $updateInstantBuyDataResponse = $this->sendRequest($resource, ApiMethodEnum::PATCH, $updateBuyerKeyRequest->getData());
+        
+        // Cria objeto de resposta
+        $response = new BaseResponse($updateInstantBuyDataResponse->Success, $updateInstantBuyDataResponse);
+
+        // Retorna resposta
         return $response;
     }
 

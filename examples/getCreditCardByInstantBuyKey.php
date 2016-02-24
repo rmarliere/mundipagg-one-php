@@ -1,5 +1,4 @@
 <?php
-
 require_once(dirname(__FILE__) . '/../init.php');
 
 try
@@ -16,7 +15,7 @@ try
     $instantBuyKey = "04728dc3-5e0c-47c2-b6b7-9b5c421add09";
 
     // Faz a chamada para criação
-    $response = $client->GetInstantBuyDataByInstantBuyKey($instantBuyKey);
+    $response = $client->getCreditCard($instantBuyKey);
 
     // Imprime responsta
     print "<pre>";

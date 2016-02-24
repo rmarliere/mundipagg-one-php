@@ -1,5 +1,4 @@
 <?php
-
 require_once(dirname(__FILE__) . '/../init.php');
 
 try
@@ -9,40 +8,45 @@ try
 
     // Define a chave da loja
     \Gateway\ApiClient::setMerchantKey("85328786-8BA6-420F-9948-5352F5A183EB");
-
-    // Cria objeto requisição
+    
+    //Cria um novo instantBuyData para que possa deletá-lo
+     // Cria objeto requisição
     $request = new \Gateway\One\DataContract\Request\CreateInstantBuyDataRequest();
     
     $request
     ->setCreditCardBrand(\Gateway\One\DataContract\Enum\CreditCardBrandEnum::MASTERCARD)
-    ->setBuyerKey("460b3d1d-5c13-4f40-92db-36aa05729c79")
-    ->setCreditCardNumber("4111111111111111")
-    ->setExpMonth(10)
-    ->setExpYear(22)
-    ->setHolderName("LUKE SKYWALKER")
+    ->setCreditCardNumber("5555444433332222")
+    ->setExpMonth(12)
+    ->setExpYear(2030)
+    ->setHolderName("gateway TESTE")
     ->setSecurityCode("999")
-    ->setIsOneDollarAuthEnabled(false)
+    ->setIsOneDollarAuthEnabled(true)
     ->getBillingAddress()
-    ->setStreet("Mos Eisley Cantina")
-    ->setNumber("123")
-    ->setComplement("")
-    ->setDistrict("Mos Eisley")
-    ->setCity("Tatooine")
+    ->setStreet("Rua da Quitanda")
+    ->setNumber("199")
+    ->setComplement("10º andar")
+    ->setDistrict("Centro")
+    ->setCity("Rio de Janeiro")
     ->setState("RJ")
-    ->setZipCode("20001000")
+    ->setZipCode("20091005")
     ->setCountry(\Gateway\One\DataContract\Enum\CountryEnum::BRAZIL);
-        
+    
+
     //Cria um objeto ApiClient
-    $client = new Gateway\ApiClient(); 
+    $client = new Gateway\ApiClient();
     
     // Faz a chamada para criação
-    $response = $client->createCreditCard($request);
+    $createCreditCard = $client->createCreditCard($request);
     
-    
-    // Imprime resposta
+    // Faz a chamada para criação
+    $deleteInstantBuyDataResponse = $client->deleteCreditCard($createCreditCard->getData()->InstantBuyKey);
+
+    // Imprime responsta
     print "<pre>";
-    print json_encode($response->getData(), JSON_PRETTY_PRINT);
+    print json_encode(array('success' => $deleteInstantBuyDataResponse->isSuccess(), 'data' => $deleteInstantBuyDataResponse->getData()), JSON_PRETTY_PRINT);
     print "</pre>";
+
+    
 }
 catch (\Gateway\One\DataContract\Report\ApiError $error)
 {
@@ -58,3 +62,4 @@ catch (Exception $ex)
     print json_encode($ex, JSON_PRETTY_PRINT);
     print "</pre>";
 }
+

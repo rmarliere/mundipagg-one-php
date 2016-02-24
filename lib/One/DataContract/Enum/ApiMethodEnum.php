@@ -27,4 +27,6 @@ abstract class ApiMethodEnum
      *
      */
     const DELETE = 'DELETE';
+    
+    const PATCH = 'PATCH';
 }
