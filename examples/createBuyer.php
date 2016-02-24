@@ -14,7 +14,7 @@ try
     $request = new \Gateway\One\DataContract\Request\CreateBuyerRequest();
     
     $request
-    ->setBirthdate('1990-08-20T00:00:00')
+    ->setBirthdate(\DateTime::createFromFormat('d/m/Y', '20/08/1990'))
     ->setBuyerCategory(\Gateway\One\DataContract\Enum\BuyerCategoryEnum::PLUS)
     ->setBuyerReference("C3PO")
     ->setCreateDateInMerchant(new \DateTime())
@@ -41,7 +41,7 @@ try
     ->setState("RJ")
     ->setZipCode("20001000")
     ->setCountry(\Gateway\One\DataContract\Enum\CountryEnum::BRAZIL);
-    
+
     //Cria um objeto ApiClient
     $client = new Gateway\ApiClient();
     

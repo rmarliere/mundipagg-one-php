@@ -382,23 +382,23 @@ class CreateBuyerRequest extends BaseObject
         $this->WorkPhone = $workPhone;
 
         return $this;
-    }    
+    }
 
     /**
      * @return string
      */
-    public function getBirthDate()
+    public function getBirthdate()
     {
-        return $this->Birthdate;
+        return \DateTime::createFromFormat('Y-m-d\TH:i:s', $this->Birthdate);
     }
 
     /**
-     * @param string $birthDate
+     * @param \DateTime $birthDate
      * @return $this
      */
-    public function setBirthDate($birthDate)
+    public function setBirthdate(\DateTime $birthdate)
     {
-        $this->Birthdate = $birthDate;
+        $this->Birthdate = $birthdate->format('Y-m-d\TH:i:s');
 
         return $this;
     }

@@ -16,7 +16,7 @@ try
     $request = new \Gateway\One\DataContract\Request\CreateBuyerRequest();
     
     $request
-    ->setBirthDate(\DateTime::createFromFormat('d/m/Y', '11/05/1990'))
+    ->setBirthdate(\DateTime::createFromFormat('d/m/Y', '11/05/1990'))
     ->setBuyerCategory(\Gateway\One\DataContract\Enum\BuyerCategoryEnum::PLUS)
     ->setBuyerReference("123456")
     ->setCreateDateInMerchant(new \DateTime())
@@ -44,7 +44,7 @@ try
     ->setState("RJ")
     ->setZipCode("20091005")
     ->setCountry(\Gateway\One\DataContract\Enum\CountryEnum::BRAZIL);
-    
+    //var_dump($request);exit;
     // Faz a chamada para criação
     $responseBuyer = $client->createBuyer($request);
     
