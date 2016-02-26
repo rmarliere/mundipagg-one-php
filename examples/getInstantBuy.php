@@ -16,7 +16,7 @@ try
     $instantBuyKey = "04728dc3-5e0c-47c2-b6b7-9b5c421add09";
 
     // Faz a chamada para criação
-    $response = $client->GetInstantBuyDataByInstantBuyKey($instantBuyKey);
+    $response = $client->getInstantBuyDataByInstantBuyKey($instantBuyKey);
 
     // Imprime responsta
     print "<pre>";
