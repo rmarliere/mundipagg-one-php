@@ -15,7 +15,7 @@ try
     $buyerKey = "460b3d1d-5c13-4f40-92db-36aa05729c79";
 
     // Faz a chamada para criação
-    $response = $client->GetInstantBuyDataByBuyerKey($buyerKey);
+    $response = $client->getInstantBuyDataByBuyerKey($buyerKey);
 
     // Imprime responsta
     print "<pre>";

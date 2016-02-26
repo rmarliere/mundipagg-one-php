@@ -234,11 +234,11 @@ class ApiClient
         //exit;
         // Dispara a requisição
         $buyerRequest = $this->sendRequest("Buyer/", ApiMethodEnum::POST, $buyerContract->getData());
-        
-       
+
+
          // Cria objeto de resposta
-        $response = new BaseResponse($buyerRequest->Success, $buyerRequest);  
-        
+        $response = new BaseResponse($buyerRequest->Success, $buyerRequest);
+
          // Retorna reposta
         return $response;
     }
@@ -246,8 +246,8 @@ class ApiClient
     public function getBuyer ($buyerKey)
     {
         $resource = "Buyer/" . $buyerKey;
-        
-        
+
+
         // Dispara a requisição
         $buyerResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
 
@@ -257,28 +257,28 @@ class ApiClient
         // Retorna rsposta
         return $response;
     }
-    
+
     public function createCreditCard(One\DataContract\Request\CreateInstantBuyDataRequest $createInstantBuyDataRequest)
-    {   
+    {
         // Dispara a requisição
         $createCreditCardResponse = $this->sendRequest("CreditCard/", ApiMethodEnum::POST, $createInstantBuyDataRequest->getData());
-        
+
         // Cria objeto de resposta
         $response = new BaseResponse($createCreditCardResponse->Success, $createCreditCardResponse);
 
         return $response;
     }
-    
+
     public function deleteCreditCard($instantBuyKey)
     {
         $resource = sprintf("creditcard/%s", $instantBuyKey);
-        
+
         // Dispara a requisição
         $deleteCreditCardResponse = $this->sendRequest($resource, ApiMethodEnum::DELETE);
-        
+
         // Cria objeto de resposta
         $response = new BaseResponse($deleteCreditCardResponse->Success, $deleteCreditCardResponse);
-        
+
         return $response;
     }
 
@@ -361,10 +361,10 @@ class ApiClient
      * @return BaseResponse
      * @throws \Exception
      */
-    public function GetInstantBuyDataByInstantBuyKey($instantBuyKey) {
+    public function getInstantBuyDataByInstantBuyKey($instantBuyKey) {
         return $this->getCreditCard($instantBuyKey);
     }
-    
+
     public function getCreditCard($instantBuyKey) {
         $resource = sprintf("creditcard/%s", $instantBuyKey);
 
@@ -388,10 +388,10 @@ class ApiClient
      * @return BaseResponse
      * @throws \Exception
      */
-    public function GetInstantBuyDataByBuyerKey($buyerKey) {
+    public function getInstantBuyDataByBuyerKey($buyerKey) {
         return $this->getCreditCardWithBuyerKey($buyerKey);
     }
-    
+
     public function getCreditCardWithBuyerKey($buyerKey) {
         $resource = sprintf("creditcard/BuyerKey=%s", $buyerKey);
 
@@ -409,14 +409,14 @@ class ApiClient
         // Retorna rsposta
         return $response;
     }
-    
+
     public function updateInstantBuyData($instantBuyKey, One\DataContract\Request\UpdateInstantBuyDataRequest $updateBuyerKeyRequest)
     {
         $resource = sprintf("creditcard/%s", $instantBuyKey);
-        
+
         //Dispara a requisição
         $updateInstantBuyDataResponse = $this->sendRequest($resource, ApiMethodEnum::PATCH, $updateBuyerKeyRequest->getData());
-        
+
         // Cria objeto de resposta
         $response = new BaseResponse($updateInstantBuyDataResponse->Success, $updateInstantBuyDataResponse);
 
