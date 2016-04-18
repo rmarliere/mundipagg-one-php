@@ -58,7 +58,7 @@ try
     ->setGender(\Gateway\One\DataContract\Enum\GenderEnum::MALE)
     ->setHomePhone("(21)30030460")
     ->setMobilePhone("(21)999998888")
-    ->setBirthdate(\DateTime::createFromFormat('d/m/Y', '11/05/1990'))
+    ->setBirthDate(\DateTime::createFromFormat('d/m/Y', '11/05/1990'))
     ->setFacebookId("1234567890")
     ->setTwitterId("1234567890")
     ->setCreateDateInMerchant(new \DateTime())
