@@ -366,7 +366,7 @@ class Buyer extends BaseObject
     /**
      * @return string
      */
-    public function getBirthdate()
+    public function getBirthDate()
     {
         return \DateTime::createFromFormat('Y-m-d\TH:i:s', $this->Birthdate);
     }
@@ -375,7 +375,7 @@ class Buyer extends BaseObject
      * @param \DateTime $birthDate
      * @return $this
      */
-    public function setBirthdate(\DateTime $birthDate)
+    public function setBirthDate(\DateTime $birthDate)
     {
         $this->Birthdate = $birthDate->format('Y-m-d\TH:i:s');
 
