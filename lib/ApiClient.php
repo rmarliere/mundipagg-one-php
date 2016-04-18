@@ -228,6 +228,19 @@ class ApiClient
         return $response;
     }
 
+    public function createToken(One\DataContract\Request\TokenRequest $tokenRequest)
+    {
+        // Dispara a requisição
+        $tokenResponse = $this->sendRequest(ApiResourceEnum::TOKEN, ApiMethodEnum::POST, $tokenRequest->getData());
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($tokenResponse->Success, $tokenResponse);
+
+        // Retorna reposta
+        return $response;
+
+    }
+
     public function createBuyer(One\DataContract\Request\CreateBuyerRequest $buyerContract)
     {
         //var_dump($buyerContract->getBirthDate());

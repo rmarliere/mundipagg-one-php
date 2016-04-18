@@ -81,7 +81,7 @@ class Buyer extends BaseObject
     /**
      * @var string Data de nascimento do comprador
      */
-    protected $BirthDate;
+    protected $Birthdate;
 
     /**
      * @var Address[] Coleção de endereços do comprador.
@@ -201,7 +201,7 @@ class Buyer extends BaseObject
     }
 
     /**
-     * @param BuyerCategoryEnum $buyerCategory
+     * @param string $buyerCategory
      * @return $this
      */
     public function setBuyerCategory($buyerCategory)
@@ -277,7 +277,7 @@ class Buyer extends BaseObject
     }
 
     /**
-     * @param EmailTypeEnum $emailType
+     * @param string $emailType
      * @return $this
      */
     public function setEmailType($emailType)
@@ -366,18 +366,18 @@ class Buyer extends BaseObject
     /**
      * @return string
      */
-    public function getBirthDate()
+    public function getBirthdate()
     {
-        return \DateTime::createFromFormat('Y-m-d\TH:i:s', $this->BirthDate);
+        return \DateTime::createFromFormat('Y-m-d\TH:i:s', $this->Birthdate);
     }
 
     /**
      * @param \DateTime $birthDate
      * @return $this
      */
-    public function setBirthDate(\DateTime $birthDate)
+    public function setBirthdate(\DateTime $birthDate)
     {
-        $this->BirthDate = $birthDate->format('Y-m-d\TH:i:s');
+        $this->Birthdate = $birthDate->format('Y-m-d\TH:i:s');
 
         return $this;
     }

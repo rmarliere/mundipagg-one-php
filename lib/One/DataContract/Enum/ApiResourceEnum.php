@@ -15,4 +15,5 @@ abstract class ApiResourceEnum
     const QUERY = 'sale/query';
     const INSTANT_BUY_KEY = 'instantbuykey';
     const BUYER_KEY = 'buyerkey';
+    const TOKEN = 'token/';
 }

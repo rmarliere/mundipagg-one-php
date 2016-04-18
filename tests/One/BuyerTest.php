@@ -11,9 +11,9 @@ class BuyerTest extends \PHPUnit_Framework_TestCase
         $buyer = new Buyer();
 
         $birthDate = \DateTime::createFromFormat('d/m/Y', '11/05/1990');
-        $buyer->setBirthDate($birthDate);
+        $buyer->setBirthdate($birthDate);
 
-        $this->assertNotEmpty($buyer->getBirthDate());
-        $this->assertEquals($birthDate, $buyer->getBirthDate());
+        $this->assertNotEmpty($buyer->getBirthdate());
+        $this->assertEquals($birthDate, $buyer->getBirthdate());
     }
 }
