@@ -126,7 +126,7 @@ class ApiClient
             ),
             CURLOPT_URL => $this->buildUrl($uri),
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 10,
+            CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_SSL_VERIFYPEER => self::isSslCertsVerificationEnabled()
         );
