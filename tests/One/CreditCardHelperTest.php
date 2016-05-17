@@ -8,10 +8,12 @@ use Gateway\One\Helper\CreditCardHelper;
 
 class CreditCardHelperTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @expectedException \Gateway\One\DataContract\Report\CreditCardError
+     */
     public function testCreateCreditCard_Failure()
     {
-        $creditCard = CreditCardHelper::createCreditCard("", "", "", "");
-        $this->assertFalse($creditCard);
+        CreditCardHelper::createCreditCard("", "", "", "");
     }
 
     public function testCreateCreditCard_Success()
