@@ -137,7 +137,8 @@ class ApiClient
         }
 
         if (strstr($uri, 'TransactionReportFile') == false) {
-            array_push($options[CURLOPT_HTTPHEADER], 'Content-type: application/json', 'Accept: application/json');
+            $options[CURLOPT_HTTPHEADER][] = 'Content-type: application/json';
+            $options[CURLOPT_HTTPHEADER][] = 'Accept: application/json';
         }
 
         // Associa o certificado para a verificação
