@@ -84,7 +84,7 @@ try
 
     $request->getOptions()
     ->disableAntiFraud()
-    ->setAntiFraudServiceCode("123")
+    // ->setAntiFraudServiceCode("123")
     ->setCurrencyIso(\Gateway\One\DataContract\Enum\CurrencyIsoEnum::BRL)
     ->setRetries(3);
 
@@ -137,6 +137,10 @@ try
 
     // Faz a chamada para criação
     $response = $client->createSale($request);
+
+    print "<pre>";
+    print json_encode(array($request->getData()), JSON_PRETTY_PRINT);
+    print "</pre>";
 
     // Imprime resposta
     print "<pre>";
