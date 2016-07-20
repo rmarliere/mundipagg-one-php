@@ -20,7 +20,7 @@ abstract class BaseObject
                 $propertie = $propertie->getData();
             }
 
-            if ($propertie == null){
+            if (is_null($propertie)) {
                 unset($properties[$propertieName]);
             }
         }

@@ -92,7 +92,6 @@ class SaleOptions extends BaseObject
     public function disableAntiFraud()
     {
         $this->IsAntiFraudEnabled = false;
-
         return $this;
     }
 
