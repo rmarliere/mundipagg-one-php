@@ -50,7 +50,7 @@ abstract class CreditCardHelper
         {
             return CreditCardBrandEnum::VISA;
         }
-        elseif ($number[0] == '5')
+        elseif ($number[0] == '5' || $number[0] == '2')
         {
             return CreditCardBrandEnum::MASTERCARD;
         }
