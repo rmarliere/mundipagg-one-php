@@ -46,7 +46,7 @@ class CreditCardTransactionOptions extends BaseObject
     /**
      * @var string Url de notificação
      */
-    protected $v;
+    protected $notificationUrl;
 
     /**
      * @return string
