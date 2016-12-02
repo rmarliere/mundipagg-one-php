@@ -47,8 +47,7 @@ try
     ->setIataAmountInCents(0)
     ->setInterestRate(0)
     ->setPaymentMethodCode(\Gateway\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
-    ->setSoftDescriptorText("TESTE")
-    ->setNotificationUrl("http://google.com");
+    ->setSoftDescriptorText("TESTE");
 
     // Dados do comprador
     $request->getBuyer()
