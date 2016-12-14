@@ -121,10 +121,13 @@ class Recurrency extends BaseObject
 
     /**
      * @param bool $OneDollarAuth
+     * @return $this
      */
     public function setOneDollarAuth($OneDollarAuth)
     {
         $this->OneDollarAuth = $OneDollarAuth;
+
+        return $this;
     }
 
 
