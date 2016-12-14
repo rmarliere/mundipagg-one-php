@@ -31,6 +31,11 @@ class Recurrency extends BaseObject
     protected $Recurrences;
 
     /**
+     * @var bool Transação de R$ 1,00 para validar o cartão
+     */
+    protected $OneDollarAuth;
+
+    /**
      * @return string
      */
     public function getDateToStartBilling()
@@ -104,6 +109,22 @@ class Recurrency extends BaseObject
         $this->Recurrences = $Recurrences;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOneDollarAuth()
+    {
+        return $this->OneDollarAuth;
+    }
+
+    /**
+     * @param bool $OneDollarAuth
+     */
+    public function setOneDollarAuth($OneDollarAuth)
+    {
+        $this->OneDollarAuth = $OneDollarAuth;
     }
 
 
