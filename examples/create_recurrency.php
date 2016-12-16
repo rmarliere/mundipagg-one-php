@@ -54,7 +54,8 @@ try
     ->setDateToStartBilling(new DateTime())
     ->setFrequency(\Gateway\One\DataContract\Enum\FrequencyEnum::MONTHLY)
     ->setInterval(1)
-    ->setRecurrences(2);
+    ->setRecurrences(2)
+    ->setOneDollarAuth(true);
 
     // Dados do comprador
     $request->getBuyer()
