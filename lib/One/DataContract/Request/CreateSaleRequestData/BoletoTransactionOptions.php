@@ -20,6 +20,11 @@ class BoletoTransactionOptions extends BaseObject
      */
     protected $DaysToAddInBoletoExpirationDate;
 
+     /**
+     * @var string Url de notificação
+     */
+    protected $notificationUrl;
+
     /**
      * @return string
      */
@@ -57,4 +62,15 @@ class BoletoTransactionOptions extends BaseObject
 
         return $this;
     }
+
+    /**
+    * @param string $notificationUrl
+    * @return $this
+    */
+   public function setNotificationUrl($notificationUrl)
+   {
+       $this->NotificationUrl = $notificationUrl;
+
+       return $this;
+   }
 }
