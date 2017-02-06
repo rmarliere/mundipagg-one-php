@@ -180,7 +180,7 @@ class CreditCardTransactionOptions extends BaseObject
     }
 
     /**
-     * @param bool $IsNotificationEnabled
+     * @param boolean $IsNotificationEnabled
      * @return $this
      */
     public function setIsNotificationEnabled($IsNotificationEnabled)

@@ -26,7 +26,8 @@ try
     ->getOptions()
     ->setCurrencyIso(\Gateway\One\DataContract\Enum\CurrencyIsoEnum::BRL)
     ->setDaysToAddInBoletoExpirationDate(5)
-    ->setNotificationUrl("http://myurl.com");
+    ->setNotificationUrl("http://myurl.com")
+    ->setIsNotificationEnabled(true);
 
     // Endereço de cobrança do comprador no do boleto
     $boletoTransaction->getBillingAddress()
