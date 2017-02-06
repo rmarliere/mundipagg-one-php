@@ -26,6 +26,11 @@ class BoletoTransactionOptions extends BaseObject
     protected $notificationUrl;
 
     /**
+     * @var boolean 
+     */
+    protected $IsNotificationEnabled;
+
+    /**
      * @return string
      */
     public function getCurrencyIso()
@@ -73,4 +78,15 @@ class BoletoTransactionOptions extends BaseObject
 
        return $this;
    }
+
+   /**
+     * @param boolean $IsNotificationEnabled
+     * @return $this
+     */
+    public function setIsNotificationEnabled($IsNotificationEnabled)
+    {
+        $this->IsNotificationEnabled = $IsNotificationEnabled;
+
+        return $this;
+    }
 }
