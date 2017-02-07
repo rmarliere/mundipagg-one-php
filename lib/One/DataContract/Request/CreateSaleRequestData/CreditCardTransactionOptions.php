@@ -49,6 +49,12 @@ class CreditCardTransactionOptions extends BaseObject
     protected $notificationUrl;
 
     /**
+     * @var boolean 
+     */
+    protected $IsNotificationEnabled;
+
+
+    /**
      * @return string
      */
     public function getCurrencyIso()
@@ -169,6 +175,17 @@ class CreditCardTransactionOptions extends BaseObject
     public function setNotificationUrl($notificationUrl)
     {
         $this->NotificationUrl = $notificationUrl;
+
+        return $this;
+    }
+
+    /**
+     * @param boolean $IsNotificationEnabled
+     * @return $this
+     */
+    public function setIsNotificationEnabled($IsNotificationEnabled)
+    {
+        $this->IsNotificationEnabled = $IsNotificationEnabled;
 
         return $this;
     }

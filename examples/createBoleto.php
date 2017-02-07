@@ -25,7 +25,9 @@ try
     ->setTransactionReference(uniqid())
     ->getOptions()
     ->setCurrencyIso(\Gateway\One\DataContract\Enum\CurrencyIsoEnum::BRL)
-    ->setDaysToAddInBoletoExpirationDate(5);
+    ->setDaysToAddInBoletoExpirationDate(5)
+    ->setNotificationUrl("http://myurl.com")
+    ->setIsNotificationEnabled(true);
 
     // Endereço de cobrança do comprador no do boleto
     $boletoTransaction->getBillingAddress()

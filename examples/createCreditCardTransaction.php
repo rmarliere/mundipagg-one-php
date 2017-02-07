@@ -48,7 +48,8 @@ try
     ->setInterestRate(0)
     ->setPaymentMethodCode(\Gateway\One\DataContract\Enum\PaymentMethodEnum::SIMULATOR)
     ->setSoftDescriptorText("TESTE")
-    ->setNotificationUrl("http://myurl.com");
+    ->setNotificationUrl("http://myurl.com")
+    ->setIsNotificationEnabled(true);
 
     // Dados do comprador
     $request->getBuyer()
