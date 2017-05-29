@@ -52,6 +52,11 @@ class CreditCard extends BaseObject
      */
     protected $SecurityCode;
 
+    /**
+     * @var boolean One Dollar Auth.
+     */
+    protected $IsOneDollarAuthEnabled;
+
     public function __construct()
     {
         $this->BillingAddress = null;
@@ -199,6 +204,25 @@ class CreditCard extends BaseObject
     public function setSecurityCode($securityCode)
     {
         $this->SecurityCode = $securityCode;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getOneDollarAuth()
+    {
+        return $this->IsOneDollarAuthEnabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     * @return $this
+     */
+    public function setOneDollarAuth($enabled)
+    {
+        $this->IsOneDollarAuthEnabled = $enabled;
 
         return $this;
     }
